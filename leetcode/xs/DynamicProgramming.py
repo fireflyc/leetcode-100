@@ -61,7 +61,7 @@ def coin_change(coins: List[int], amount: int) -> int:
     return count
 
 
-def coin_change2():
+def coin_change2(coins: List[int], amount: int) -> int:
     """
     https://leetcode-cn.com/problems/coin-change-2/
     :return:
