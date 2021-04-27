@@ -17,3 +17,13 @@ def solution(houses: List[int]) -> int:
         else:
             sum_b += houses[i]
     return max(sum_a, sum_b)
+
+
+def rob(houses: List[int]) -> int:
+    if len(houses) == 1:
+        return houses[0]
+    if not houses:
+        return 0
+    return max(houses[0]+rob(houses[2:]), houses[1]+rob(houses[3:]))
+
+

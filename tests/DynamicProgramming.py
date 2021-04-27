@@ -7,8 +7,10 @@ class DynamicProgrammingTestCase(unittest.TestCase):
     def test_house_robber(self):
         houses = [1, 2, 3, 1]
         self.assertEqual(4, HouseRobber.solution(houses))
+        self.assertEqual(4, HouseRobber.rob(houses))
         houses = [2, 7, 9, 3, 1]
         self.assertEqual(12, HouseRobber.solution(houses))
+        self.assertEqual(12, HouseRobber.rob(houses))
 
     def test_fib(self):
         self.assertEqual(1, Fibonacci.fib(2))
