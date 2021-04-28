@@ -1,14 +1,17 @@
 import unittest
 
 from leetcode.xs import DynamicProgramming
+from leetcode.stella import DynamicProgramming as dp
 
 
 class DynamicProgrammingTestCase(unittest.TestCase):
     def test_house_robber(self):
         houses = [1, 2, 3, 1]
         self.assertEqual(4, DynamicProgramming.house_robber(houses))
+        self.assertEqual(4, dp.house_robber(houses))
         houses = [2, 7, 9, 3, 1]
         self.assertEqual(12, DynamicProgramming.house_robber(houses))
+        self.assertEqual(12, dp.house_robber(houses))
 
     def test_fib(self):
         self.assertEqual(1, DynamicProgramming.fib(2))
