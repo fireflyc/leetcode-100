@@ -25,11 +25,34 @@ def coin_change(coins: List[int], amount: int) -> int:
             return -1
         if target in coins:
             return 1
-        for cdp in [change(target-coin) for coin in coins]:
+        for cdp in [change(target - coin) for coin in coins]:
             if cdp > -1:
-                dp = cdp+1 if dp == -1 else min(dp, cdp+1)
+                dp = cdp + 1 if dp == -1 else min(dp, cdp + 1)
         cache[target] = dp
         return dp
 
     return change(amount)
+
+
+def coin_change2(coins: List[int], amount: int) -> int:
+    coins = sorted(coins, reverse=True)
+
+    cache = {}
+
+    def change(choices, target):
+        if target in cache and len(choices) in cache[target]:
+            return cache[target][len(choices)]
+
+        makeup = 0
+        if target <= 0:
+            return makeup
+        if target in choices:
+            makeup += 1
+        for i, v in enumerate(choices):
+            makeup += change(choices[i:], target - v)
+        cache[target] = cache.get(target) or {}
+        cache[target][len(choices)] = makeup
+        return makeup
+
+    return change(coins, amount) if amount > 0 else 1
 
