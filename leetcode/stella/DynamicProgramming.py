@@ -12,4 +12,25 @@ def house_robber(houses: List[int]) -> int:
     return maxn
 
 
+def coin_change(coins: List[int], amount: int) -> int:
+    cache = {}
+
+    def change(target):
+        if target in cache:
+            return cache[target]
+        dp = -1
+        if target == 0:
+            return 0
+        if target < 0:
+            return -1
+        if target in coins:
+            return 1
+        for cdp in [change(target-coin) for coin in coins]:
+            if cdp > -1:
+                dp = cdp+1 if dp == -1 else min(dp, cdp+1)
+        cache[target] = dp
+        return dp
+
+    return change(amount)
+
 
