@@ -36,7 +36,6 @@ def coin_change(coins: List[int], amount: int) -> int:
 
 def coin_change2(coins: List[int], amount: int) -> int:
     coins = sorted(coins, reverse=True)
-
     cache = {}
 
     def change(choices, target):
@@ -55,4 +54,19 @@ def coin_change2(coins: List[int], amount: int) -> int:
         return makeup
 
     return change(coins, amount) if amount > 0 else 1
+
+
+def length_of_lts(nums: List[int]) -> int:
+    cache = []
+    while nums:
+        last = nums.pop()
+        _cache = [last]
+        for c in cache:
+            if last+1 == c[0]:
+                cache.remove(c)
+            if last < c[0] and len(c)+1 > len(_cache):
+                _cache = [last] + c
+        cache.append(_cache)
+
+    return max([len(c) for c in cache])
 
