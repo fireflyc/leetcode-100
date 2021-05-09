@@ -38,3 +38,7 @@ class DynamicProgrammingTestCase(unittest.TestCase):
             31, 34, 37, 38, 39, 41, 43, 44, 45, 47, 48, 49, 54, 57, 60, 62, 63, 66, 69, 70, 72, 74, 76,
             78, 80, 81, 82, 83, 84, 85, 88, 89, 91, 93, 94, 97, 99
         ], [9, 38, 134]))
+
+    def test_unique_binary_search_trees(self):
+        self.assertEqual(5, DynamicProgramming.unique_binary_search_trees(3))
+        self.assertEqual(1, DynamicProgramming.unique_binary_search_trees(19))

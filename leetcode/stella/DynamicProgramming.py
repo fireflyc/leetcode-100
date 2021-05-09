@@ -87,3 +87,24 @@ def min_cost_tickets(days: List[int], costs: List[int]) -> int:
         return payment
 
     return cost(days)
+
+
+def unique_binary_search_trees(n: int) -> int:
+    cache = {}
+
+    def tree(nodes: int):
+        amount = 0
+        if len(nodes) <= 0:
+            return 1
+        if len(nodes) in cache:
+            return cache[len(nodes)]
+        for i in range(0, len(nodes)):
+            left_tree = tree(nodes[:i])
+            right_tree = tree(nodes[i+1:])
+            amount += left_tree * right_tree
+        cache[len(nodes)] = amount
+        return amount
+
+    return tree(list(range(0, n)))
+
+
