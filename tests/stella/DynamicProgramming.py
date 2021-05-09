@@ -42,3 +42,7 @@ class DynamicProgrammingTestCase(unittest.TestCase):
     def test_unique_binary_search_trees(self):
         self.assertEqual(5, DynamicProgramming.unique_binary_search_trees(3))
         self.assertEqual(1, DynamicProgramming.unique_binary_search_trees(19))
+
+    def test_trapping_rain_water(self):
+        self.assertEqual(6, DynamicProgramming.trapping_rain_water([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]))
+        self.assertEqual(9, DynamicProgramming.trapping_rain_water([4, 2, 0, 3, 2, 5]))

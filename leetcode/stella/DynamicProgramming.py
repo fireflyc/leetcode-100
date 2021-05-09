@@ -92,7 +92,7 @@ def min_cost_tickets(days: List[int], costs: List[int]) -> int:
 def unique_binary_search_trees(n: int) -> int:
     cache = {}
 
-    def tree(nodes: int):
+    def tree(nodes: list):
         amount = 0
         if len(nodes) <= 0:
             return 1
@@ -106,5 +106,14 @@ def unique_binary_search_trees(n: int) -> int:
         return amount
 
     return tree(list(range(0, n)))
+
+
+def trapping_rain_water(height: List[int]) -> int:
+    amount = 0
+    for i, h in enumerate(height):
+        min_height = min(max(height[:i] or [0]), max(height[i+1:] or [0]))
+        if min_height > h:
+            amount += min_height-h
+    return amount
 
 
