@@ -41,7 +41,6 @@ def coin_change2(coins: List[int], amount: int) -> int:
     def change(choices, target):
         if target in cache and len(choices) in cache[target]:
             return cache[target][len(choices)]
-
         makeup = 0
         if target <= 0:
             return makeup
@@ -62,11 +61,29 @@ def length_of_lts(nums: List[int]) -> int:
         last = nums.pop()
         _cache = [last]
         for c in cache:
-            if last+1 == c[0]:
+            if last + 1 == c[0]:
                 cache.remove(c)
-            if last < c[0] and len(c)+1 > len(_cache):
+            if last < c[0] and len(c) + 1 > len(_cache):
                 _cache = [last] + c
         cache.append(_cache)
 
     return max([len(c) for c in cache])
 
+
+def min_cost_tickets(days: List[int], costs: List[int]) -> int:
+    day_cost = {1: costs[0], 7: costs[1], 30: costs[2]}
+    cache = {}
+
+    def cost(period):
+        payment = 0
+        if not period:
+            return 0
+        if period[0] in cache:
+            return cache[period[0]]
+        for d, c in day_cost.items():
+            left_cost = cost([p for p in period if p > period[0] + d - 1]) + c
+            payment = min(left_cost, payment) if payment else left_cost
+        cache[period[0]] = payment
+        return payment
+
+    return cost(days)

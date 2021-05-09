@@ -29,3 +29,12 @@ class DynamicProgrammingTestCase(unittest.TestCase):
         self.assertEqual(4, DynamicProgramming.length_of_lts([0, 1, 0, 3, 2, 3]))
         self.assertEqual(6, DynamicProgramming.length_of_lts([1, 3, 6, 7, 9, 4, 10, 5, 6]))
         self.assertEqual(2500, DynamicProgramming.length_of_lts(list(range(1, 2501))))
+
+    def test_min_cost_tickets(self):
+        self.assertEqual(11, DynamicProgramming.min_cost_tickets([1, 4, 6, 7, 8, 20], [2, 7, 15]))
+        self.assertEqual(6, DynamicProgramming.min_cost_tickets([1, 4, 6, 7, 8, 20], [7, 2, 15]))
+        self.assertEqual(423, DynamicProgramming.min_cost_tickets([
+            1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 20, 21, 24, 25, 27, 28, 29, 30,
+            31, 34, 37, 38, 39, 41, 43, 44, 45, 47, 48, 49, 54, 57, 60, 62, 63, 66, 69, 70, 72, 74, 76,
+            78, 80, 81, 82, 83, 84, 85, 88, 89, 91, 93, 94, 97, 99
+        ], [9, 38, 134]))
