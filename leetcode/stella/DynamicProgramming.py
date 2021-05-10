@@ -117,3 +117,20 @@ def trapping_rain_water(height: List[int]) -> int:
     return amount
 
 
+def edit_distance(word1: str, word2: str) -> int:
+    cache = {}
+
+    def edit(w1, w2):
+        if not w1 or not w2:
+            return max(len(w2), len(w1))
+        if w1[-1] == w2[-1]:
+            return edit(w1[:-1], w2[:-1])
+        if w2 in cache and w1 in cache[w2]:
+            return cache[w2][w1]
+        min_distance = min([1 + edit(w1, w2[:-1]), 1 + edit(w1[:-1], w2), 1 + edit(w1[:-1], w2[:-1])])
+        cache[w2] = cache.get(w2) or {}
+        cache[w2][w1] = min_distance
+        return min_distance
+
+    return edit(word1, word2)
+
