@@ -134,3 +134,36 @@ def edit_distance(word1: str, word2: str) -> int:
 
     return edit(word1, word2)
 
+
+def maximize_profit(prices: List[int]) -> int:
+    # best_time_to_buy_and_sell_stock
+    if len(prices) <= 1:
+        return 0
+    max_profit = 0
+    buy = prices[0]
+    for i in range(1, len(prices)):
+        sell = prices[i]
+        if sell > buy:
+            max_profit = max(max_profit, sell-buy)
+        elif sell < buy:
+            buy = sell
+    return max_profit
+
+
+def maximize_profit2(prices: List[int]) -> int:
+    if len(prices) <= 1:
+        return 0
+    max_profit = 0
+    for i in range(0, len(prices)-1):
+        profit = prices[i+1] - prices[i]
+        if profit > 0:
+            max_profit += profit
+    return max_profit
+
+
+def maximize_profit3(prices: List[int]) -> int:
+    # https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/submissions/
+    pass
+
+
+
