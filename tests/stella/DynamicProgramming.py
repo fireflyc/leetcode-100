@@ -61,11 +61,17 @@ class DynamicProgrammingTestCase(unittest.TestCase):
         self.assertEqual(0, DynamicProgramming.maximize_profit2([7, 6, 4, 3, 1]))
 
     def test_maximize_profit3(self):
-        # self.assertEqual(6, DynamicProgramming.maximize_profit3([3, 3, 5, 0, 0, 3, 1, 4]))
-        # self.assertEqual(4, DynamicProgramming.maximize_profit3([1, 2, 3, 4, 5]))
-        # self.assertEqual(0, DynamicProgramming.maximize_profit3([7, 6, 4, 3, 1]))
-        # self.assertEqual(0, DynamicProgramming.maximize_profit3([1]))
-        self.assertEqual(0, DynamicProgramming.maximize_profit3(list(range(10000, 0, -1))+[0]*100))
+        self.assertEqual(6, DynamicProgramming.maximize_profit3([3, 3, 5, 0, 0, 3, 1, 4]))
+        self.assertEqual(4, DynamicProgramming.maximize_profit3([1, 2, 3, 4, 5]))
+        self.assertEqual(0, DynamicProgramming.maximize_profit3([7, 6, 4, 3, 1]))
+        self.assertEqual(0, DynamicProgramming.maximize_profit3([1]))
+        self.assertEqual(0, DynamicProgramming.maximize_profit3(list(range(10000, 0, -1)) + [0] * 100))
+        self.assertEqual(7, DynamicProgramming.maximize_profit3([6, 1, 3, 2, 4, 7]))
+        import json
+        with open('maximize_profit3.json', 'r') as fr:
+            test_data = json.load(fr)
+            print(type(test_data), len(test_data))
+            print(DynamicProgramming.maximize_profit3(test_data))
 
 
 

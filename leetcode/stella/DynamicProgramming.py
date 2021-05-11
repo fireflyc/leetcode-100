@@ -162,8 +162,18 @@ def maximize_profit2(prices: List[int]) -> int:
 
 
 def maximize_profit3(prices: List[int]) -> int:
-    # https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/submissions/
-    pass
+    begin, end = [], []
+    begin_min, end_max = prices[0], prices[-1]
+    for i in range(0, len(prices)):
+        begin_pre = begin[i-1] if begin else 0
+        begin.append(max(begin_pre, prices[i] - begin_min))
+        begin_min = min(begin_min, prices[i])
 
+        end_idx = -1*(i+1)
+        end_next = end[-1] if end else 0
+        end.append(max(end_max - prices[end_idx], end_next))
+        end_max = max(end_max, prices[end_idx])
+
+    return max([begin[i]+end[-1*(i+1)] for i in range(0, len(begin))])
 
 
