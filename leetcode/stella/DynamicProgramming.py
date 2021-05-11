@@ -177,3 +177,6 @@ def maximize_profit3(prices: List[int]) -> int:
     return max([begin[i]+end[-1*(i+1)] for i in range(0, len(begin))])
 
 
+def super_egg_drop(k: int, n: int) -> int:
+    pass
+

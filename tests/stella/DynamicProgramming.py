@@ -70,8 +70,7 @@ class DynamicProgrammingTestCase(unittest.TestCase):
         import json
         with open('maximize_profit3.json', 'r') as fr:
             test_data = json.load(fr)
-            print(type(test_data), len(test_data))
-            print(DynamicProgramming.maximize_profit3(test_data))
+            self.assertEqual(119994, DynamicProgramming.maximize_profit3(test_data))
 
 
 
