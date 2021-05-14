@@ -202,4 +202,39 @@ def super_egg_drop(k: int, n: int) -> int:
     return drop_egg(k, n)
 
 
+def maximal_square(matrix: List[List[str]]) -> int:
+    cache = {}
+
+    def side(r, c):
+        if r >= len(matrix) or c >= len(matrix[r]):
+            return 0
+        if r in cache and c in cache[r]:
+            return cache[r][c]
+        if matrix[r][c] == '1':
+            s = 1 + min(side(r, c+1), side(r+1, c), side(r+1, c+1))
+            cache[r] = cache.get(r) or {}
+            cache[r][c] = s
+            return s
+        return 0
+
+    largest = 0
+    for r in range(0, len(matrix)):
+        for c in range(0, len(matrix[r])):
+            largest = max(side(r, c), largest)
+
+    return largest*largest
+
+
+def subarray_sum_equals_k(nums: List[int], k: int) -> int:
+    count, subarray_sum = 0, 0
+    cache = {k: 1}
+    for i in range(0, len(nums)):
+        subarray_sum += nums[i]
+        count += (cache.get(subarray_sum) or 0)
+        num_plus_k = subarray_sum + k
+        cache[num_plus_k] = (cache.get(num_plus_k) or 0) + 1
+    return count
+
+
+
 

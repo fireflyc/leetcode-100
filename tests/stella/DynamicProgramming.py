@@ -1,5 +1,4 @@
 import unittest
-
 from leetcode.stella import DynamicProgramming
 
 
@@ -82,4 +81,22 @@ class DynamicProgrammingTestCase(unittest.TestCase):
         self.assertEqual(6, DynamicProgramming.super_egg_drop(3, 26))
         self.assertEqual(19, DynamicProgramming.super_egg_drop(4, 5000))
 
+    def test_maximal_square(self):
+        self.assertEqual(4, DynamicProgramming.maximal_square([
+            ["1", "0", "1", "0", "0"],
+            ["1", "0", "1", "1", "1"],
+            ["1", "1", "1", "1", "1"],
+            ["1", "0", "0", "1", "0"]
+        ]))
+        self.assertEqual(1, DynamicProgramming.maximal_square([["0", "1"], ["1", "0"]]))
+        self.assertEqual(0, DynamicProgramming.maximal_square([["0"]]))
+        self.assertEqual(90000, DynamicProgramming.maximal_square([["1"] * 300] * 300))
+
+    def test_subarray_sum_equals_k(self):
+        self.assertEqual(2, DynamicProgramming.subarray_sum_equals_k(nums=[1, 1, 1], k=2))
+        self.assertEqual(3, DynamicProgramming.subarray_sum_equals_k(nums=[1, -1, 0], k=0))
+        import json
+        with open('subarray_sum_equals_k.json', 'r') as fr:
+            test_data = json.load(fr)
+            self.assertEqual(4012, DynamicProgramming.subarray_sum_equals_k(**test_data))
 
