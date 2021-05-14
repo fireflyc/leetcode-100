@@ -178,5 +178,28 @@ def maximize_profit3(prices: List[int]) -> int:
 
 
 def super_egg_drop(k: int, n: int) -> int:
-    pass
+    cache = {}
+
+    def drop_egg(eggs, floors):
+        if eggs == 1 or floors <= 2:
+            return floors
+        if floors in cache and eggs in cache[floors]:
+            return cache[floors][eggs]
+
+        min_drop = 0
+        start, end = 1, floors
+        while end > start + 1:
+            middle = int((start + end) / 2)
+            left, right = drop_egg(eggs-1, middle-1), drop_egg(eggs, floors-middle)
+            drop = 1 + max(left, right)
+            min_drop = min(min_drop, drop) if min_drop > 0 else drop
+            start, end = (middle, end) if right > left else (start, middle)
+
+        cache[floors] = cache.get(floors) or {}
+        cache[floors][eggs] = min_drop
+        return min_drop
+
+    return drop_egg(k, n)
+
+
 

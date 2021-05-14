@@ -72,5 +72,14 @@ class DynamicProgrammingTestCase(unittest.TestCase):
             test_data = json.load(fr)
             self.assertEqual(119994, DynamicProgramming.maximize_profit3(test_data))
 
+    def test_super_egg_drop(self):
+        self.assertEqual(2, DynamicProgramming.super_egg_drop(1, 2))
+        self.assertEqual(3, DynamicProgramming.super_egg_drop(2, 6))
+        self.assertEqual(4, DynamicProgramming.super_egg_drop(3, 14))
+        self.assertEqual(4, DynamicProgramming.super_egg_drop(2, 9))
+        self.assertEqual(2, DynamicProgramming.super_egg_drop(2, 2))
+        self.assertEqual(3, DynamicProgramming.super_egg_drop(2, 4))
+        self.assertEqual(6, DynamicProgramming.super_egg_drop(3, 26))
+        self.assertEqual(19, DynamicProgramming.super_egg_drop(4, 5000))
 
 
