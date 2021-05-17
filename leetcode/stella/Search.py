@@ -25,5 +25,27 @@ def max_area_of_island(grid: List[List[int]]) -> int:
 
 
 def escape_a_large_maze(blocked: List[List[int]], source: List[int], target: List[int]) -> bool:
-    pass
+    if not blocked:
+        return True
+
+    max_row, max_col = 10**6, 10**6
+    blocked, traversed, track = set([tuple(b) for b in blocked]), set(), [tuple(source)]
+
+    def next_step(cur_pos):
+        relative_pos = [(1, 0) if target[0] > cur_pos[0] else (-1, 0), (0, 1) if target[1] > cur_pos[1] else (0, -1)]
+        for r, c in relative_pos:
+            abs_pos = (cur_pos[0] + r, cur_pos[1] + c)
+            if 0 <= abs_pos[1] <= max_col and 0 <= abs_pos[0] <= max_row and abs_pos not in traversed and abs_pos not in blocked:
+                return abs_pos
+
+    while track:
+        next_pos = next_step(track[-1])
+        if not next_pos:
+            track.pop()
+        elif next_pos == tuple(target):
+            return True
+        else:
+            track.append(next_pos)
+            traversed.add(next_pos)
+    return False
 
