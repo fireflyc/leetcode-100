@@ -2,9 +2,6 @@ from typing import List
 
 
 def max_area_of_island(grid: List[List[int]]) -> int:
-    max_area = 0
-    searched = set()
-
     def search(row, column):
         if not grid[row][column]:
             return set()
@@ -19,6 +16,7 @@ def max_area_of_island(grid: List[List[int]]) -> int:
                     new_found.append((r, c))
         return area
 
+    max_area, searched = 0, set()
     for r in range(0, len(grid)):
         for c in range(0, len(grid[r])):
             if (r, c) not in searched:
@@ -28,4 +26,6 @@ def max_area_of_island(grid: List[List[int]]) -> int:
     return max_area
 
 
+def escape_a_large_maze(blocked: List[List[int]], source: List[int], target: List[int]) -> bool:
+    pass
 
