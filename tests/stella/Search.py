@@ -32,3 +32,4 @@ class SearchTestCase(unittest.TestCase):
         self.assertEqual(False, Search.escape_a_large_maze(blocked=[[0, 1], [1, 0]], source=[0, 0], target=[0, 2]))
         self.assertEqual(True, Search.escape_a_large_maze(blocked=[], source=[0, 0], target=[999999, 999999]))
 
+

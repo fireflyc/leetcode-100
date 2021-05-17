@@ -5,11 +5,9 @@ def max_area_of_island(grid: List[List[int]]) -> int:
     def search(row, column):
         if not grid[row][column]:
             return set()
-        area = {(row, column)}
-        new_found = [(row, column)]
+        area, new_found = {(row, column)}, [(row, column)]
         while new_found:
-            pos = new_found[0]
-            new_found = new_found[1:]
+            pos, new_found = new_found[0], new_found[1:]
             for r, c in [(pos[0]-1, pos[1]+0), (pos[0]+1, pos[1]+0), (pos[0]+0, pos[1]-1), (pos[0]+0, pos[1]+1)]:
                 if 0 <= r < len(grid) and 0 <= c < len(grid[r]) and grid[r][c] and (r, c) not in area:
                     area.add((r, c))
