@@ -50,3 +50,27 @@ def escape_a_large_maze(blocked: List[List[int]], source: List[int], target: Lis
         if rslt:
             return True
     return False
+
+
+def word_search(board: List[List[str]], word: str) -> bool:
+
+    def bfs(r, c, target, traversed):
+        if not (0 <= r < len(board) and 0 <= c < len(board[r])) or (r, c) in traversed:
+            return False
+        if not target:
+            return True
+        traversed.add((r, c))
+        if board[r][c] != target[0]:
+            return False
+        if board[r][c] == target:
+            return True
+        return bfs(r-1, c, target[1:], traversed.copy()) or bfs(r+1, c, target[1:], traversed.copy()) \
+            or bfs(r, c-1, target[1:], traversed.copy()) or bfs(r, c+1, target[1:], traversed.copy())
+
+    for r in range(0, len(board)):
+        for c in range(0, len(board[r])):
+            found = bfs(r, c, word, set())
+            if found:
+                return True
+    return False
+

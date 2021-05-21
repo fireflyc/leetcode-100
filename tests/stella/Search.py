@@ -124,3 +124,17 @@ class SearchTestCase(unittest.TestCase):
             blocked=[[0, 999991], [0, 999993], [0, 999996], [1, 999996], [1, 999997], [1, 999998], [1, 999999]],
             source=[0, 999997], target=[0, 2]
         ))
+
+    def test_word_search(self):
+        self.assertEqual(True, Search.word_search(
+            board=[["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]], word="ABCCED"
+        ))
+        self.assertEqual(True, Search.word_search(
+            board=[["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]], word="SEE"
+        ))
+        self.assertEqual(False, Search.word_search(
+            board=[["A", "B", "C", "E"], ["S", "F", "C", "S"], ["A", "D", "E", "E"]], word="ABCB"
+        ))
+        self.assertEqual(True, Search.word_search(
+            board=[["a", "b"], ["c", "d"]], word="cdba"
+        ))
