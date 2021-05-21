@@ -27,25 +27,26 @@ def max_area_of_island(grid: List[List[int]]) -> int:
 def escape_a_large_maze(blocked: List[List[int]], source: List[int], target: List[int]) -> bool:
     if not blocked:
         return True
+    max_size, traverse_limit = 10**6, int((len(blocked)**2))
+    blocked = set([tuple(b) for b in blocked])
 
-    max_row, max_col = 10**6, 10**6
-    blocked, traversed, track = set([tuple(b) for b in blocked]), set(), [tuple(source)]
-
-    def next_step(cur_pos):
-        relative_pos = [(1, 0) if target[0] > cur_pos[0] else (-1, 0), (0, 1) if target[1] > cur_pos[1] else (0, -1)]
-        for r, c in relative_pos:
-            abs_pos = (cur_pos[0] + r, cur_pos[1] + c)
-            if 0 <= abs_pos[1] <= max_col and 0 <= abs_pos[0] <= max_row and abs_pos not in traversed and abs_pos not in blocked:
-                return abs_pos
-
-    while track:
-        next_pos = next_step(track[-1])
-        if not next_pos:
-            track.pop()
-        elif next_pos == tuple(target):
+    def bfs(r, c, package, queue, aim):
+        if (r, c) == tuple(aim):
             return True
-        else:
-            track.append(next_pos)
-            traversed.add(next_pos)
-    return False
+        if (r, c) not in blocked and (r, c) not in package:
+            package.add((r, c))
+            queue.extend([(x, y) for x, y in [(r-1, c), (r+1, c), (r, c-1), (r, c+1)] if 0 <= x < max_size and 0 <= y < max_size])
+        return False
 
+    source_traversed, source_queue = set(), [tuple(source)]
+    target_traversed, target_queue = set(), [tuple(target)]
+    while source_queue and target_queue:
+        if len(source_traversed) > traverse_limit and len(target_traversed) > traverse_limit:
+            return True
+        source_one, source_queue = source_queue[0], source_queue[1:]
+        target_one, target_queue = target_queue[0], target_queue[1:]
+        rslt = bfs(source_one[0], source_one[1], source_traversed, source_queue, target) \
+               or bfs(target_one[0], target_one[1], target_traversed, target_queue, source)
+        if rslt:
+            return True
+    return False
