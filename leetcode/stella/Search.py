@@ -74,3 +74,35 @@ def word_search(board: List[List[str]], word: str) -> bool:
                 return True
     return False
 
+
+def check_if_there_is_a_valid_path_in_a_grid(grid: List[List[int]]) -> bool:
+    cell = {
+        1: {"left", "right"}, 2: {"top", "down"}, 3: {"left", "down"},
+        4: {"down", "right"}, 5: {"top", "left"}, 6: {"top", "right"}
+    }
+    enter_direction = {(1, 0): "top", (-1, 0): "down", (0, -1): "right", (0, 1): "left"}
+    exit_direction = {"left": (0, -1), "right": (0, 1), "top": (-1, 0), "down": (1, 0)}
+    traversed = set()
+    queue = [(0, 0)]
+
+    while queue:
+        block, queue = queue[0], queue[1:]
+        if block == (len(grid)-1, len(grid[0])-1):
+            return True
+        cell_num = grid[block[0]][block[1]]
+        for d in cell[cell_num]:
+            exit_from = exit_direction[d]
+            coord = (block[0]+exit_from[0], block[1]+exit_from[1])
+            if 0 <= coord[0] < len(grid) and 0 <= coord[1] < len(grid[0]):
+                coord_num = grid[coord[0]][coord[1]]
+                enter_from = enter_direction[exit_from]
+                if enter_from in cell[coord_num] and coord not in traversed:
+                    queue.append(coord)
+        traversed.add(block)
+    return False
+
+
+
+
+
+

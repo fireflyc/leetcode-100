@@ -138,3 +138,16 @@ class SearchTestCase(unittest.TestCase):
         self.assertEqual(True, Search.word_search(
             board=[["a", "b"], ["c", "d"]], word="cdba"
         ))
+
+    def test_check_if_there_is_a_valid_path_in_a_grid(self):
+        has_valid_path = Search.check_if_there_is_a_valid_path_in_a_grid
+        self.assertEqual(True, has_valid_path(grid=[[2, 4, 3], [6, 5, 2]]))
+        self.assertEqual(False, has_valid_path(grid=[[1, 2, 1], [1, 2, 1]]))
+        self.assertEqual(False, has_valid_path(grid=[[1, 1, 2]]))
+        self.assertEqual(True, has_valid_path(grid=[[1, 1, 1, 1, 1, 1, 3]]))
+        self.assertEqual(True, has_valid_path(grid=[[2], [2], [2], [2], [2], [2], [6]]))
+        self.assertEqual(True, has_valid_path(grid=[[4, 1], [6, 1]]))
+        self.assertEqual(True, has_valid_path(grid=[[1, 1, 1, 1, 3], [1, 1, 1, 1, 2], [1, 1, 1, 1, 2], [1, 1, 1, 1, 2],
+                                                    [1, 1, 1, 1, 2]]))
+
+
