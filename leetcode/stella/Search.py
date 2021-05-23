@@ -82,8 +82,7 @@ def check_if_there_is_a_valid_path_in_a_grid(grid: List[List[int]]) -> bool:
     }
     enter_direction = {(1, 0): "top", (-1, 0): "down", (0, -1): "right", (0, 1): "left"}
     exit_direction = {"left": (0, -1), "right": (0, 1), "top": (-1, 0), "down": (1, 0)}
-    traversed = set()
-    queue = [(0, 0)]
+    traversed, queue = set(), [(0, 0)]
 
     while queue:
         block, queue = queue[0], queue[1:]
@@ -102,6 +101,28 @@ def check_if_there_is_a_valid_path_in_a_grid(grid: List[List[int]]) -> bool:
     return False
 
 
+def as_far_from_land_as_possible(grid: List[List[int]]) -> int:
+    grid_sum = sum([sum(g) for g in grid])
+    if grid_sum in [0, len(grid)*len(grid[0])]:
+        return -1
+
+    def search(row, col):
+        if grid[row][col]:
+            return 0
+        for md in range(1, len(grid)+len(grid[0])):
+            for i in range(-md, md+1):
+                j = md - abs(i)
+                for coord in [(row+i, col+j), (row+i, col-j)]:
+                    if 0 <= coord[0] < len(grid) and 0 <= coord[1] < len(grid[0]) and grid[coord[0]][coord[1]]:
+                        return md
+        return 0
+
+    max_distance = 0
+    for r in range(0, len(grid)):
+        for c in range(0, len(grid[r])):
+            d = search(r, c)
+            max_distance = max(d, max_distance)
+    return max_distance
 
 
 
