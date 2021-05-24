@@ -153,5 +153,10 @@ class SearchTestCase(unittest.TestCase):
     def test_as_far_from_land_as_possible(self):
         self.assertEqual(2, Search.as_far_from_land_as_possible([[1, 0, 1], [0, 0, 0], [1, 0, 1]]))
         self.assertEqual(4, Search.as_far_from_land_as_possible([[1, 0, 0], [0, 0, 0], [0, 0, 0]]))
-        self.assertEqual(-1, Search.as_far_from_land_as_possible([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]))
-        pass
+        self.assertEqual(-1,
+                         Search.as_far_from_land_as_possible([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]))
+
+    def test_generate_parentheses(self):
+        self.assertEqual(set(["((()))", "(()())", "(())()", "()(())", "()()()"]), set(Search.generate_parentheses(3)))
+        self.assertEqual(set(["()"]), set(Search.generate_parentheses(1)))
+

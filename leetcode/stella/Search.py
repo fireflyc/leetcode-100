@@ -125,5 +125,21 @@ def as_far_from_land_as_possible(grid: List[List[int]]) -> int:
     return max_distance
 
 
+def generate_parentheses(n: int) -> List[str]:
+    left_bracket, right_bracket = "(", ")"
+    choices = ["("]
+
+    while len(choices[0]) < n*2:
+        tmp = []
+        for c in choices:
+            left_num, right_num = c.count(left_bracket), c.count(right_bracket)
+            if left_num < n:
+                tmp.append(c+left_bracket)
+            if right_num < left_num and right_num < n:
+                tmp.append(c+right_bracket)
+        choices = tmp
+    return choices
+
+
 
 
