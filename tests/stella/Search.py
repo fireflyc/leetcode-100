@@ -160,3 +160,8 @@ class SearchTestCase(unittest.TestCase):
         self.assertEqual(set(["((()))", "(()())", "(())()", "()(())", "()()()"]), set(Search.generate_parentheses(3)))
         self.assertEqual(set(["()"]), set(Search.generate_parentheses(1)))
 
+    def test_01_matrix(self):
+        self.assertEqual([[0, 0, 0], [0, 1, 0], [0, 0, 0]], Search.zero_one_matrix([[0, 0, 0], [0, 1, 0], [0, 0, 0]]))
+        self.assertEqual([[0, 0, 0], [0, 1, 0], [1, 2, 1]], Search.zero_one_matrix([[0, 0, 0], [0, 1, 0], [1, 1, 1]]))
+
+

@@ -127,7 +127,7 @@ def as_far_from_land_as_possible(grid: List[List[int]]) -> int:
 
 def generate_parentheses(n: int) -> List[str]:
     left_bracket, right_bracket = "(", ")"
-    choices = ["("]
+    choices = [left_bracket]
 
     while len(choices[0]) < n*2:
         tmp = []
@@ -139,6 +139,26 @@ def generate_parentheses(n: int) -> List[str]:
                 tmp.append(c+right_bracket)
         choices = tmp
     return choices
+
+
+def zero_one_matrix(mat: List[List[int]]) -> List[List[int]]:
+    def zero_one_distance(row, col):
+        if 0 <= row < len(mat) and 0 <= col < len(mat[0]):
+            if mat[row][col] == 0:
+                return 0
+            for distance in range(1, len(mat[0])+len(mat)):
+                for i in range(-1*distance, distance+1):
+                    for j in [distance - abs(i), abs(i) - distance]:
+                        ri, cj = row+i, col+j
+                        if 0 <= ri < len(mat) and 0 <= cj < len(mat[0]):
+                            if mat[ri][cj] == 0:
+                                return distance
+
+    result = [[None for j in range(0, len(mat[0]))] for i in range(0, len(mat))]
+    for r in range(0, len(mat)):
+        for c in range(0, len(mat[0])):
+            result[r][c] = zero_one_distance(r, c)
+    return result
 
 
 
