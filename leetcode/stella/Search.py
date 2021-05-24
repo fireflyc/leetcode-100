@@ -179,3 +179,16 @@ def number_of_islands(grid: List[List[str]]) -> int:
                 mark_island(r, c)
                 amount += 1
     return amount
+
+
+def permutations(nums: List[int]) -> List[List[int]]:
+    all_permutation = []
+    choices = [[num] for num in nums]
+    while choices:
+        choice, choices = choices[0], choices[1:]
+        if len(choice) == len(nums):
+            all_permutation.append(choice)
+        else:
+            remain = set(nums) - set(choice)
+            choices.extend([choice + [item] for item in remain])
+    return all_permutation

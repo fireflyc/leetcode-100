@@ -176,3 +176,9 @@ class SearchTestCase(unittest.TestCase):
             ["0", "0", "1", "0", "0"],
             ["0", "0", "0", "1", "1"]
         ]))
+
+    def test_permutations(self):
+        self.assertEqual([[1, 2, 3], [1, 3, 2], [2, 1, 3], [2, 3, 1], [3, 1, 2], [3, 2, 1]], Search.permutations([1, 2, 3]))
+        self.assertEqual([[0, 1], [1, 0]], Search.permutations([0, 1]))
+        self.assertEqual([[1]], Search.permutations([1]))
+
