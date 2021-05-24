@@ -143,16 +143,15 @@ def generate_parentheses(n: int) -> List[str]:
 
 def zero_one_matrix(mat: List[List[int]]) -> List[List[int]]:
     def zero_one_distance(row, col):
-        if 0 <= row < len(mat) and 0 <= col < len(mat[0]):
-            if mat[row][col] == 0:
-                return 0
-            for distance in range(1, len(mat[0])+len(mat)):
-                for i in range(-1*distance, distance+1):
-                    for j in [distance - abs(i), abs(i) - distance]:
-                        ri, cj = row+i, col+j
-                        if 0 <= ri < len(mat) and 0 <= cj < len(mat[0]):
-                            if mat[ri][cj] == 0:
-                                return distance
+        if mat[row][col] == 0:
+            return 0
+        for distance in range(1, len(mat[0])+len(mat)):
+            for i in range(-1*distance, distance+1):
+                for j in [distance - abs(i), abs(i) - distance]:
+                    ri, cj = row+i, col+j
+                    if 0 <= ri < len(mat) and 0 <= cj < len(mat[0]):
+                        if mat[ri][cj] == 0:
+                            return distance
 
     result = [[None for j in range(0, len(mat[0]))] for i in range(0, len(mat))]
     for r in range(0, len(mat)):
