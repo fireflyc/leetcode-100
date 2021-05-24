@@ -153,8 +153,7 @@ class SearchTestCase(unittest.TestCase):
     def test_as_far_from_land_as_possible(self):
         self.assertEqual(2, Search.as_far_from_land_as_possible([[1, 0, 1], [0, 0, 0], [1, 0, 1]]))
         self.assertEqual(4, Search.as_far_from_land_as_possible([[1, 0, 0], [0, 0, 0], [0, 0, 0]]))
-        self.assertEqual(-1,
-                         Search.as_far_from_land_as_possible([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]))
+        self.assertEqual(-1, Search.as_far_from_land_as_possible([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]]))
 
     def test_generate_parentheses(self):
         self.assertEqual(set(["((()))", "(()())", "(())()", "()(())", "()()()"]), set(Search.generate_parentheses(3)))
@@ -164,4 +163,16 @@ class SearchTestCase(unittest.TestCase):
         self.assertEqual([[0, 0, 0], [0, 1, 0], [0, 0, 0]], Search.zero_one_matrix([[0, 0, 0], [0, 1, 0], [0, 0, 0]]))
         self.assertEqual([[0, 0, 0], [0, 1, 0], [1, 2, 1]], Search.zero_one_matrix([[0, 0, 0], [0, 1, 0], [1, 1, 1]]))
 
-
+    def test_number_of_islands(self):
+        self.assertEqual(1, Search.number_of_islands([
+            ["1", "1", "1", "1", "0"],
+            ["1", "1", "0", "1", "0"],
+            ["1", "1", "0", "0", "0"],
+            ["0", "0", "0", "0", "0"]
+        ]))
+        self.assertEqual(3, Search.number_of_islands([
+            ["1", "1", "0", "0", "0"],
+            ["1", "1", "0", "0", "0"],
+            ["0", "0", "1", "0", "0"],
+            ["0", "0", "0", "1", "1"]
+        ]))

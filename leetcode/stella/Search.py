@@ -160,5 +160,22 @@ def zero_one_matrix(mat: List[List[int]]) -> List[List[int]]:
     return result
 
 
+def number_of_islands(grid: List[List[str]]) -> int:
 
+    def mark_island(row, col):
+        if 0 <= row < len(grid) and 0 <= col < len(grid[0]):
+            if grid[row][col] == "1":
+                grid[row][col] = "-1"
+                mark_island(row-1, col)
+                mark_island(row+1, col)
+                mark_island(row, col-1)
+                mark_island(row, col+1)
 
+    amount = 0
+    for r in range(0, len(grid)):
+        for c in range(0, len(grid[0])):
+            cell = grid[r][c]
+            if cell == "1":
+                mark_island(r, c)
+                amount += 1
+    return amount
