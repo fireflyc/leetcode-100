@@ -18,3 +18,20 @@ def find_words_that_can_be_formed_by_characters(words: List[str], chars: str) ->
 
     return total_match
 
+
+def print_words_vertically(s: str) -> List[str]:
+    words = []
+    blank = " "
+    pos = 0
+    for c in s:
+        if c == blank:
+            pos = 0
+            continue
+        if len(words) <= pos:
+            words.append("")
+        if len(words[pos]) < len(words[0])-1:
+            words[pos] += blank*(len(words[0])-1-len(words[pos]))
+        words[pos] += c
+        pos += 1
+    return words
+
