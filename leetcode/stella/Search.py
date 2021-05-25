@@ -192,3 +192,17 @@ def permutations(nums: List[int]) -> List[List[int]]:
             remain = set(nums) - set(choice)
             choices.extend([choice + [item] for item in remain])
     return all_permutation
+
+
+def first_missing_positive(nums: List[int]) -> int:
+    missing, minimal = 1, None
+    while nums:
+        num, nums = nums[0], nums[1:]
+        if num == missing:
+            missing += 1
+        elif num > missing:
+            if minimal and num == minimal:
+                break
+            minimal = min(minimal, num) if minimal else num
+            nums.append(num)
+    return missing
