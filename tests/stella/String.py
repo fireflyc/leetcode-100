@@ -15,3 +15,7 @@ class StringTestCase(unittest.TestCase):
         self.assertEqual(["CIC", "OSO", "N M", "T I", "E N", "S G", "T"],
                          String.print_words_vertically("CONTEST IS COMING"))
 
+    def test_string_without_aaa_or_bbb(self):
+        self.assertIn(String.string_without_aaa_or_bbb(1, 2), ["abb", "bab", "bba"])
+        self.assertEqual("aabaa", String.string_without_aaa_or_bbb(4, 1))
+        self.assertEqual("bbab", String.string_without_aaa_or_bbb(1, 3))
