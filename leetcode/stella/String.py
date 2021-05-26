@@ -84,12 +84,7 @@ class Trie:
                 cur = node
 
     def search(self, word: str) -> bool:
-        cur = self.root
-        for c in word+"\n":
-            cur = cur.find_child(c)
-            if not cur:
-                return False
-        return True
+        return self.startsWith(word+"\n")
 
     def startsWith(self, prefix: str) -> bool:
         cur = self.root
@@ -98,14 +93,10 @@ class Trie:
             if not cur:
                 return False
         return True
-    pass
 
 
 def implement_trie_prefix_tree(operators: List[str], operands: List[List]) -> List:
-    # operator: "Trie", "insert", "search", "search", "startsWith", "insert", "search"
-    # operand: [[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
-    trie = None
-    output = []
+    trie, output = None, []
     for i, operator in enumerate(operators):
         operand = operands[i]
         if operator == "Trie":
@@ -119,3 +110,10 @@ def implement_trie_prefix_tree(operators: List[str], operands: List[List]) -> Li
             output.append(trie.startsWith(*operand))
     return output
 
+
+def longest_happy_prefix(s: str) -> str:
+    prefix = ""
+    for i in range(1, len(s)):
+        if s[:i] == s[-1*i:]:
+            prefix = s[:i]
+    return prefix

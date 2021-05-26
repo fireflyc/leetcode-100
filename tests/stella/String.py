@@ -25,5 +25,10 @@ class StringTestCase(unittest.TestCase):
             operators=["Trie", "insert", "search", "search", "startsWith", "insert", "search"],
             operands=[[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
         ))
-        pass
+
+    def test_longest_happy_prefix(self):
+        self.assertEqual("l", String.longest_happy_prefix("level"))
+        self.assertEqual("abab", String.longest_happy_prefix("ababab"))
+        self.assertEqual("leet", String.longest_happy_prefix("leetcodeleet"))
+        self.assertEqual("", String.longest_happy_prefix("a"))
 
