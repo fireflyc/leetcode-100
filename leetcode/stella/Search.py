@@ -195,14 +195,21 @@ def permutations(nums: List[int]) -> List[List[int]]:
 
 
 def first_missing_positive(nums: List[int]) -> int:
-    missing, minimal = 1, None
-    while nums:
-        num, nums = nums[0], nums[1:]
-        if num == missing:
-            missing += 1
-        elif num > missing:
-            if minimal and num == minimal:
-                break
-            minimal = min(minimal, num) if minimal else num
-            nums.append(num)
-    return missing
+    numbers = nums
+    for i in range(0, len(numbers)):
+        loop = True
+        while loop:
+            num = numbers[i]
+            if num == i + 1:
+                loop = False
+            elif num > len(numbers) or num <= 0:
+                numbers[i] = 0
+                loop = False
+            elif num != numbers[num-1]:
+                numbers[i], numbers[num-1] = numbers[num-1], num
+            else:
+                numbers[i] = 0
+                loop = False
+    if numbers[0] > 1:
+        return 1
+    return numbers.index(0) + 1 if numbers.count(0) > 0 else numbers[-1]+1

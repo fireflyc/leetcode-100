@@ -185,8 +185,11 @@ class SearchTestCase(unittest.TestCase):
         self.assertEqual([[1]], Search.permutations([1]))
 
     def test_first_missing_positive(self):
-        # self.assertEqual(3, Search.first_missing_positive([1, 2, 0]))
-        # self.assertEqual(2, Search.first_missing_positive([3, 4, -1, 1]))
-        # self.assertEqual(1, Search.first_missing_positive([7, 8, 9, 11, 12]))
-        # self.assertEqual(3, Search.first_missing_positive([0, 2, 2, 1, 1]))
-        self.assertEqual(500001, Search.first_missing_positive(list(range(0, 500000))))
+        self.assertEqual(3, Search.first_missing_positive([1, 2, 0]))
+        self.assertEqual(2, Search.first_missing_positive([3, 4, -1, 1]))
+        self.assertEqual(1, Search.first_missing_positive([7, 8, 9, 11, 12]))
+        self.assertEqual(3, Search.first_missing_positive([0, 2, 2, 1, 1]))
+        self.assertEqual(500001, Search.first_missing_positive(list(range(0, 500000 + 1))))
+        self.assertEqual(2, Search.first_missing_positive([1]))
+        self.assertEqual(1, Search.first_missing_positive([2, 2]))
+        self.assertEqual(2, Search.first_missing_positive([1, 3, 3]))
