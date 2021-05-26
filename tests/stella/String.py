@@ -19,3 +19,11 @@ class StringTestCase(unittest.TestCase):
         self.assertIn(String.string_without_aaa_or_bbb(1, 2), ["abb", "bab", "bba"])
         self.assertEqual("aabaa", String.string_without_aaa_or_bbb(4, 1))
         self.assertEqual("bbab", String.string_without_aaa_or_bbb(1, 3))
+
+    def test_implement_trie_prefix_tree(self):
+        self.assertEqual([None, None, True, False, True, None, True], String.implement_trie_prefix_tree(
+            operators=["Trie", "insert", "search", "search", "startsWith", "insert", "search"],
+            operands=[[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
+        ))
+        pass
+

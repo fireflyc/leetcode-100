@@ -52,3 +52,70 @@ def string_without_aaa_or_bbb(a: int, b: int) -> str:
             s += 'ab'*letters['a'] if s and s[-1] == 'b' else 'ba'*letters['b']
             letters['a'], letters['b'] = 0, 0
     return s
+
+
+class TrieNode:
+    def __init__(self, value: str = None):
+        self.value = value
+        self.children = []
+
+    def find_child(self, value):
+        for child in self.children:
+            if child.value == value:
+                return child
+
+    def append_child(self, child):
+        self.children.append(child)
+
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
+    def insert(self, word: str) -> None:
+        cur = self.root
+        for c in word+"\n":
+            child = cur.find_child(c)
+            if child:
+                cur = child
+            else:
+                node = TrieNode(c)
+                cur.append_child(node)
+                cur = node
+
+    def search(self, word: str) -> bool:
+        cur = self.root
+        for c in word+"\n":
+            cur = cur.find_child(c)
+            if not cur:
+                return False
+        return True
+
+    def startsWith(self, prefix: str) -> bool:
+        cur = self.root
+        for c in prefix:
+            cur = cur.find_child(c)
+            if not cur:
+                return False
+        return True
+    pass
+
+
+def implement_trie_prefix_tree(operators: List[str], operands: List[List]) -> List:
+    # operator: "Trie", "insert", "search", "search", "startsWith", "insert", "search"
+    # operand: [[], ["apple"], ["apple"], ["app"], ["app"], ["app"], ["app"]]
+    trie = None
+    output = []
+    for i, operator in enumerate(operators):
+        operand = operands[i]
+        if operator == "Trie":
+            trie = Trie()
+            output.append(None)
+        if operator == "insert":
+            output.append(trie.insert(*operand))
+        if operator == "search":
+            output.append(trie.search(*operand))
+        if operator == "startsWith":
+            output.append(trie.startsWith(*operand))
+    return output
+
