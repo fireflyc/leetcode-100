@@ -33,12 +33,12 @@ class StringTestCase(unittest.TestCase):
         self.assertEqual("", String.longest_happy_prefix("a"))
 
     def test_word_search_ii(self):
-        # self.assertEqual(set(["eat", "oath"]), set(String.word_search_ii(
-        #     board=[["o", "a", "a", "n"], ["e", "t", "a", "e"], ["i", "h", "k", "r"], ["i", "f", "l", "v"]],
-        #     words=["oath", "pea", "eat", "rain"]
-        # )))
-        # self.assertEqual(set([]), set(String.word_search_ii(board=[["a", "b"], ["c", "d"]], words=["abcb"])))
-        # self.assertEqual([], String.word_search_ii(board=[["a"]], words=["ab"]))
+        self.assertEqual(set(["eat", "oath"]), set(String.word_search_ii(
+            board=[["o", "a", "a", "n"], ["e", "t", "a", "e"], ["i", "h", "k", "r"], ["i", "f", "l", "v"]],
+            words=["oath", "pea", "eat", "rain"]
+        )))
+        self.assertEqual(set([]), set(String.word_search_ii(board=[["a", "b"], ["c", "d"]], words=["abcb"])))
+        self.assertEqual([], String.word_search_ii(board=[["a"]], words=["ab"]))
         with open("word_search_ii.json", 'r') as fr:
             import json
             data = json.load(fr)

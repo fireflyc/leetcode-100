@@ -120,22 +120,34 @@ def longest_happy_prefix(s: str) -> str:
 
 
 def word_search_ii(board: List[List[str]], words: List[str]) -> List[str]:
-    limit_row, limit_col, limit_word = len(board), len(board[0]), max([len(w) for w in words])
+    limit_row, limit_col = len(board), len(board[0])
+    char_collection = set([board[r][c] for c in range(0, limit_col) for r in range(0, limit_row)])
+    words = [w for w in words if set(w).issubset(char_collection)]
+
+    def match(row, col, target):
+        if board[row][col] != target[0]:
+            return False
+        matched, nth_letter, match_rc = target[0], 1, [(row, col, {(row, col)})]
+        while nth_letter < len(target) and match_rc:
+            tmp = []
+            for match_r, match_c, traversed in match_rc:
+                for i, j in [(1, 0), (-1, 0), (0, 1), (0, -1)]:
+                    ri, cj = match_r + i, match_c + j
+                    if (ri, cj) not in traversed and 0 <= ri < limit_row and 0 <= cj < limit_col and \
+                            target[nth_letter] == board[ri][cj]:
+                        tmp.append((ri, cj, traversed | {(ri, cj)}))
+            if not tmp:
+                break
+            match_rc = tmp
+            matched += target[nth_letter]
+            nth_letter += 1
+        return matched == target
+
     found = set()
-
-    def match(row, col, prefix="", traversed=set()):
-        if not (len(prefix) < limit_word and 0 <= row < limit_row and 0 <= col < limit_col and (row, col) not in traversed):
-            return
-        s = prefix + board[row][col]
-        if s in words:
-            found.add(s)
-        match(row + 1, col, s, traversed | {(row, col)})
-        match(row - 1, col, s, traversed | {(row, col)})
-        match(row, col + 1, s, traversed | {(row, col)})
-        match(row, col - 1, s, traversed | {(row, col)})
-
-    for r in range(0, len(board)):
-        for c in range(0, len(board[r])):
-            match(r, c)
+    for r in range(0, limit_row):
+        for c in range(0, limit_col):
+            for w in words:
+                if w not in found and match(r, c, w):
+                    found.add(w)
     return list(found)
 
