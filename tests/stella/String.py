@@ -47,3 +47,7 @@ class StringTestCase(unittest.TestCase):
     def test_short_encoding_of_words(self):
         self.assertEqual(10, String.short_encoding_of_words(["time", "me", "bell"]))
         self.assertEqual(2, String.short_encoding_of_words(["t"]))
+
+    def test_is_unique_lcci(self):
+        self.assertEqual(False, String.is_unique_lcci("leetcode"))
+        self.assertEqual(True, String.is_unique_lcci("abc"))

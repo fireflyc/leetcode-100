@@ -164,3 +164,13 @@ def short_encoding_of_words(words: List[str]) -> int:
         if to_insert:
             fragments.append(w)
     return len("#".join(fragments))+1
+
+
+def is_unique_lcci(astr: str) -> bool:
+    for i in range(1, len(astr)):
+        for j in range(0, i):
+            if astr[i] == astr[j]:
+                return False
+    return True
+
+
