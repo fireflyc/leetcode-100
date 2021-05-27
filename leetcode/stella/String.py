@@ -117,3 +117,25 @@ def longest_happy_prefix(s: str) -> str:
         if s[:i] == s[-1*i:]:
             prefix = s[:i]
     return prefix
+
+
+def word_search_ii(board: List[List[str]], words: List[str]) -> List[str]:
+    limit_row, limit_col, limit_word = len(board), len(board[0]), max([len(w) for w in words])
+    found = set()
+
+    def match(row, col, prefix="", traversed=set()):
+        if not (len(prefix) < limit_word and 0 <= row < limit_row and 0 <= col < limit_col and (row, col) not in traversed):
+            return
+        s = prefix + board[row][col]
+        if s in words:
+            found.add(s)
+        match(row + 1, col, s, traversed | {(row, col)})
+        match(row - 1, col, s, traversed | {(row, col)})
+        match(row, col + 1, s, traversed | {(row, col)})
+        match(row, col - 1, s, traversed | {(row, col)})
+
+    for r in range(0, len(board)):
+        for c in range(0, len(board[r])):
+            match(r, c)
+    return list(found)
+
