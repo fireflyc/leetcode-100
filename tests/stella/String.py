@@ -57,3 +57,9 @@ class StringTestCase(unittest.TestCase):
         self.assertEqual(False, String.check_permutation_lcci(s1="abc", s2="bad"))
         self.assertEqual(False, String.check_permutation_lcci(s1="a", s2="ab"))
 
+    def test_longest_substring_without_repeating_characters(self):
+        longest_substring = String.longest_substring_without_repeating_characters
+        self.assertEqual(3, longest_substring("abcabcbb"))
+        self.assertEqual(1, longest_substring("bbbbb"))
+        self.assertEqual(3, longest_substring("pwwkew"))
+        self.assertEqual(0, longest_substring(""))

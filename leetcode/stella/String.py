@@ -189,3 +189,20 @@ def check_permutation_lcci(s1: str, s2: str) -> bool:
             break
         i += 1
     return i >= len(s1)
+
+
+def longest_substring_without_repeating_characters(s: str) -> int:
+    substring_length = 0
+    for i in range(0, len(s)):
+        for j in range(i, len(s)):
+            repeat = False
+            for k in range(i, j):
+                if s[k] == s[j]:
+                    repeat = True
+                    break
+            if repeat:
+                break
+            else:
+                substring_length = max(j-i+1, substring_length)
+    return substring_length
+
