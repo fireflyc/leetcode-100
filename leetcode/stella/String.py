@@ -174,3 +174,18 @@ def is_unique_lcci(astr: str) -> bool:
     return True
 
 
+def check_permutation_lcci(s1: str, s2: str) -> bool:
+    if len(s1) < len(s2):
+        return False
+    i = 0
+    while i < len(s1):
+        count = 0
+        while s2[0] != s1[i] and count < len(s2):
+            s2 = s2[1:]+s2[0]
+            count += 1
+        if count < len(s2):
+            s2 = s2[1:]
+        else:
+            break
+        i += 1
+    return i >= len(s1)

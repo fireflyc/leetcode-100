@@ -51,3 +51,9 @@ class StringTestCase(unittest.TestCase):
     def test_is_unique_lcci(self):
         self.assertEqual(False, String.is_unique_lcci("leetcode"))
         self.assertEqual(True, String.is_unique_lcci("abc"))
+
+    def test_check_permutation_lcci(self):
+        self.assertEqual(True, String.check_permutation_lcci(s1="abc", s2="bca"))
+        self.assertEqual(False, String.check_permutation_lcci(s1="abc", s2="bad"))
+        self.assertEqual(False, String.check_permutation_lcci(s1="a", s2="ab"))
+
