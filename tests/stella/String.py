@@ -44,3 +44,6 @@ class StringTestCase(unittest.TestCase):
             data = json.load(fr)
             self.assertEqual(["ababababab"], String.word_search_ii(board=data['board'], words=data['words']))
 
+    def test_short_encoding_of_words(self):
+        self.assertEqual(10, String.short_encoding_of_words(["time", "me", "bell"]))
+        self.assertEqual(2, String.short_encoding_of_words(["t"]))

@@ -151,3 +151,16 @@ def word_search_ii(board: List[List[str]], words: List[str]) -> List[str]:
                     found.add(w)
     return list(found)
 
+
+def short_encoding_of_words(words: List[str]) -> int:
+    fragments = []
+    for w in words:
+        to_insert = True
+        for i, f in enumerate(fragments):
+            if f.endswith(w) or w.endswith(f):
+                fragments[i] = f if len(f) > len(w) else w
+                to_insert = False
+                break
+        if to_insert:
+            fragments.append(w)
+    return len("#".join(fragments))+1
