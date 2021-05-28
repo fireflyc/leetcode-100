@@ -247,3 +247,21 @@ def string_to_integer_atoi(s: str) -> int:
     return signed_int
 
 
+def reverse_words_in_a_string(s: str) -> str:
+    rs = ""
+    while s:
+        word_start, word_end = None, None
+        for i in range(len(s)-1, -1, -1):
+            if s[i] != " ":
+                word_end = i
+                for j in range(word_end, -1, -1):
+                    if s[j] != " ":
+                        word_start = j
+                    else:
+                        break
+                break
+        if None in [word_start, word_end]:
+            break
+        rs += (" " if rs else "") + s[word_start: word_end+1]
+        s = s[:word_start]
+    return rs

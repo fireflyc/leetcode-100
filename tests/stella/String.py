@@ -73,3 +73,10 @@ class StringTestCase(unittest.TestCase):
         self.assertEqual(0, String.string_to_integer_atoi("-"))
         self.assertEqual(1, String.string_to_integer_atoi("+1"))
         self.assertEqual(1, String.string_to_integer_atoi("  +01"))
+
+    def test_reverse_words_in_a_string(self):
+        self.assertEqual("blue is sky the", String.reverse_words_in_a_string("the sky is blue"))
+        self.assertEqual("world hello", String.reverse_words_in_a_string("  hello world  "))
+        self.assertEqual("example good a", String.reverse_words_in_a_string("a good   example"))
+        self.assertEqual("Alice Loves Bob", String.reverse_words_in_a_string("  Bob    Loves  Alice   "))
+        self.assertEqual("bob like even not does Alice", String.reverse_words_in_a_string("Alice does not even like bob"))
