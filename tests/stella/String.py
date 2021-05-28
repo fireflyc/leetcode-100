@@ -88,4 +88,7 @@ class StringTestCase(unittest.TestCase):
                          String.integer_to_english_words(1234567))
         self.assertEqual("One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Thousand Eight Hundred "
                          "Ninety One", String.integer_to_english_words(1234567891))
+        self.assertEqual("Eighty Three", String.integer_to_english_words(83))
+        self.assertEqual("Zero", String.integer_to_english_words(0))
+
 

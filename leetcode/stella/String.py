@@ -274,32 +274,33 @@ def integer_to_english_words(num: int) -> str:
                17: "Seventeen", 18: "Eighteen", 19: "Nineteen", 20: "Twenty", 30: "Thirty", 40: "Forty", 50: "Fifty",
                60: "Sixty", 70: "Seventy", 80: "Eighty", 90: "Ninety"}
 
-    def less_than_100(n: int):
-        ordered_key = sorted(numbers.keys(), reverse=True)
-        if n in numbers:
-            return [numbers[n]]
-        word = []
-        while n:
-            if n in ordered_key:
-                word.append(numbers[n])
-                break
-            for k in ordered_key:
-                if n > k:
-                    word.append(numbers[k])
-                    n -= k
-                    break
-        return word
+    if num == 0:
+        return "Zero"
 
-    num_words, str_num, sorted_scale = [], str(num), sorted(scales.keys())
-    from_pos, to_pos = None, None
-    for i in sorted_scale:
-        from_pos = -1 * i + 1
-        _n = str_num[from_pos:to_pos]
-        if _n:
-            num_words = less_than_100(int(_n)) + num_words
-            to_pos = from_pos
-            if len(str_num) >= i:
-                num_words = [scales[i]] + num_words
-        else:
-            break
-    return " ".join(num_words)
+    def left_strip_zero(s: str):
+        return s.lstrip("0")
+
+    def less_than_100(s: str):
+        s = left_strip_zero(s)
+        if s:
+            n = int(s)
+            if n in numbers:
+                return [numbers[int(s)]]
+            for i in sorted(numbers.keys(), reverse=True):
+                if n > i:
+                    n -= i
+                    return [numbers[i], numbers[n]]
+        return []
+
+    def i2w(s: str):
+        s = left_strip_zero(s)
+        for l in sorted(scales.keys(), reverse=True):
+            if len(s) >= l:
+                _s = i2w(s[:-1 * l + 1])
+                s = s[-1 * l + 1:]
+                if _s:
+                    return [*_s, scales[l]] + i2w(s)
+        return less_than_100(s)
+
+    data = i2w(str(num))
+    return " ".join(data)
