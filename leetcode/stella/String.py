@@ -7,7 +7,7 @@ def find_words_that_can_be_formed_by_characters(words: List[str], chars: str) ->
         for i in range(0, len(w)):
             pos = matching.find(w[i])
             if pos > -1:
-                matching = matching[:pos]+matching[pos+1:]
+                matching = matching[:pos] + matching[pos + 1:]
             else:
                 return 0
         return len(w)
@@ -29,8 +29,8 @@ def print_words_vertically(s: str) -> List[str]:
             continue
         if len(words) <= pos:
             words.append("")
-        if len(words[pos]) < len(words[0])-1:
-            words[pos] += blank*(len(words[0])-1-len(words[pos]))
+        if len(words[pos]) < len(words[0]) - 1:
+            words[pos] += blank * (len(words[0]) - 1 - len(words[pos]))
         words[pos] += c
         pos += 1
     return words
@@ -42,14 +42,14 @@ def string_without_aaa_or_bbb(a: int, b: int) -> str:
     while len(s) < a + b:
         if letters['a'] != letters['b']:
             l1, l2 = ('a', 'b') if letters['a'] > letters['b'] else ('b', 'a')
-            if len(s) > 1 and s[-2:] == l1*2:
+            if len(s) > 1 and s[-2:] == l1 * 2:
                 s += l2
                 letters[l2] -= 1
             else:
                 s += l1
                 letters[l1] -= 1
         else:
-            s += 'ab'*letters['a'] if s and s[-1] == 'b' else 'ba'*letters['b']
+            s += 'ab' * letters['a'] if s and s[-1] == 'b' else 'ba' * letters['b']
             letters['a'], letters['b'] = 0, 0
     return s
 
@@ -74,7 +74,7 @@ class Trie:
 
     def insert(self, word: str) -> None:
         cur = self.root
-        for c in word+"\n":
+        for c in word + "\n":
             child = cur.find_child(c)
             if child:
                 cur = child
@@ -84,7 +84,7 @@ class Trie:
                 cur = node
 
     def search(self, word: str) -> bool:
-        return self.startsWith(word+"\n")
+        return self.startsWith(word + "\n")
 
     def startsWith(self, prefix: str) -> bool:
         cur = self.root
@@ -114,7 +114,7 @@ def implement_trie_prefix_tree(operators: List[str], operands: List[List]) -> Li
 def longest_happy_prefix(s: str) -> str:
     prefix = ""
     for i in range(1, len(s)):
-        if s[:i] == s[-1*i:]:
+        if s[:i] == s[-1 * i:]:
             prefix = s[:i]
     return prefix
 
@@ -163,7 +163,7 @@ def short_encoding_of_words(words: List[str]) -> int:
                 break
         if to_insert:
             fragments.append(w)
-    return len("#".join(fragments))+1
+    return len("#".join(fragments)) + 1
 
 
 def is_unique_lcci(astr: str) -> bool:
@@ -181,7 +181,7 @@ def check_permutation_lcci(s1: str, s2: str) -> bool:
     while i < len(s1):
         count = 0
         while s2[0] != s1[i] and count < len(s2):
-            s2 = s2[1:]+s2[0]
+            s2 = s2[1:] + s2[0]
             count += 1
         if count < len(s2):
             s2 = s2[1:]
@@ -203,7 +203,7 @@ def longest_substring_without_repeating_characters(s: str) -> int:
             if repeat:
                 break
             else:
-                substring_length = max(j-i+1, substring_length)
+                substring_length = max(j - i + 1, substring_length)
     return substring_length
 
 
@@ -220,7 +220,7 @@ def string_to_integer_atoi(s: str) -> int:
             break
         elif c in [minus, plus]:
             be_minus = True if c == minus else False
-            start = i+1 if i+1 < len(s) and s[i+1] in numbers else start-1
+            start = i + 1 if i + 1 < len(s) and s[i + 1] in numbers else start - 1
             break
         else:
             start -= 1
@@ -235,10 +235,10 @@ def string_to_integer_atoi(s: str) -> int:
             continue
         break
 
-    upper_limit, lower_limit = (2**31)-1, -1*(2**31)
+    upper_limit, lower_limit = (2 ** 31) - 1, -1 * (2 ** 31)
     int_s, signed_int = 0, 0
     for d in digits:
-        int_s = int_s*10 + d
+        int_s = int_s * 10 + d
         signed_int = int_s * (-1 if be_minus else 1)
         if signed_int <= lower_limit:
             return lower_limit
@@ -251,7 +251,7 @@ def reverse_words_in_a_string(s: str) -> str:
     rs = ""
     while s:
         word_start, word_end = None, None
-        for i in range(len(s)-1, -1, -1):
+        for i in range(len(s) - 1, -1, -1):
             if s[i] != " ":
                 word_end = i
                 for j in range(word_end, -1, -1):
@@ -262,6 +262,44 @@ def reverse_words_in_a_string(s: str) -> str:
                 break
         if None in [word_start, word_end]:
             break
-        rs += (" " if rs else "") + s[word_start: word_end+1]
+        rs += (" " if rs else "") + s[word_start: word_end + 1]
         s = s[:word_start]
     return rs
+
+
+def integer_to_english_words(num: int) -> str:
+    scales = {10: "Billion", 7: "Million", 4: "Thousand", 3: "Hundred"}
+    numbers = {1: "One", 2: "Two", 3: "Three", 4: "Four", 5: "Five", 6: "Six", 7: "Seven", 8: "Eight", 9: "Nine",
+               10: "Ten", 11: "Eleven", 12: "Twelve", 13: "Thirteen", 14: "Fourteen", 15: "Fifteen", 16: "Sixteen",
+               17: "Seventeen", 18: "Eighteen", 19: "Nineteen", 20: "Twenty", 30: "Thirty", 40: "Forty", 50: "Fifty",
+               60: "Sixty", 70: "Seventy", 80: "Eighty", 90: "Ninety"}
+
+    def less_than_100(n: int):
+        ordered_key = sorted(numbers.keys(), reverse=True)
+        if n in numbers:
+            return [numbers[n]]
+        word = []
+        while n:
+            if n in ordered_key:
+                word.append(numbers[n])
+                break
+            for k in ordered_key:
+                if n > k:
+                    word.append(numbers[k])
+                    n -= k
+                    break
+        return word
+
+    num_words, str_num, sorted_scale = [], str(num), sorted(scales.keys())
+    from_pos, to_pos = None, None
+    for i in sorted_scale:
+        from_pos = -1 * i + 1
+        _n = str_num[from_pos:to_pos]
+        if _n:
+            num_words = less_than_100(int(_n)) + num_words
+            to_pos = from_pos
+            if len(str_num) >= i:
+                num_words = [scales[i]] + num_words
+        else:
+            break
+    return " ".join(num_words)

@@ -80,3 +80,12 @@ class StringTestCase(unittest.TestCase):
         self.assertEqual("example good a", String.reverse_words_in_a_string("a good   example"))
         self.assertEqual("Alice Loves Bob", String.reverse_words_in_a_string("  Bob    Loves  Alice   "))
         self.assertEqual("bob like even not does Alice", String.reverse_words_in_a_string("Alice does not even like bob"))
+
+    def test_integer_to_english_words(self):
+        self.assertEqual("One Hundred Twenty Three", String.integer_to_english_words(123))
+        self.assertEqual("Twelve Thousand Three Hundred Forty Five", String.integer_to_english_words(12345))
+        self.assertEqual("One Million Two Hundred Thirty Four Thousand Five Hundred Sixty Seven",
+                         String.integer_to_english_words(1234567))
+        self.assertEqual("One Billion Two Hundred Thirty Four Million Five Hundred Sixty Seven Thousand Eight Hundred "
+                         "Ninety One", String.integer_to_english_words(1234567891))
+
