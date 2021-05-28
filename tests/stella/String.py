@@ -63,3 +63,13 @@ class StringTestCase(unittest.TestCase):
         self.assertEqual(1, longest_substring("bbbbb"))
         self.assertEqual(3, longest_substring("pwwkew"))
         self.assertEqual(0, longest_substring(""))
+
+    def test_string_to_integer_atoi(self):
+        self.assertEqual(42, String.string_to_integer_atoi("42"))
+        self.assertEqual(-42, String.string_to_integer_atoi("   -42"))
+        self.assertEqual(4193, String.string_to_integer_atoi("4193 with words"))
+        self.assertEqual(0, String.string_to_integer_atoi("words and 987"))
+        self.assertEqual(-2147483648, String.string_to_integer_atoi("-91283472332"))
+        self.assertEqual(0, String.string_to_integer_atoi("-"))
+        self.assertEqual(1, String.string_to_integer_atoi("+1"))
+        self.assertEqual(1, String.string_to_integer_atoi("  +01"))

@@ -206,3 +206,44 @@ def longest_substring_without_repeating_characters(s: str) -> int:
                 substring_length = max(j-i+1, substring_length)
     return substring_length
 
+
+def string_to_integer_atoi(s: str) -> int:
+    numbers, blank, minus, plus = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"], " ", "-", "+"
+
+    start, be_minus = 0, False
+    for i, c in enumerate(s):
+        if c in [blank]:
+            start += 1
+            continue
+        elif c in numbers:
+            start = i
+            break
+        elif c in [minus, plus]:
+            be_minus = True if c == minus else False
+            start = i+1 if i+1 < len(s) and s[i+1] in numbers else start-1
+            break
+        else:
+            start -= 1
+            break
+    if start < 0:
+        return 0
+
+    digits = []
+    for i in range(start, len(s)):
+        if s[i] in numbers:
+            digits.append(int(s[i]))
+            continue
+        break
+
+    upper_limit, lower_limit = (2**31)-1, -1*(2**31)
+    int_s, signed_int = 0, 0
+    for d in digits:
+        int_s = int_s*10 + d
+        signed_int = int_s * (-1 if be_minus else 1)
+        if signed_int <= lower_limit:
+            return lower_limit
+        if signed_int >= upper_limit:
+            return upper_limit
+    return signed_int
+
+
