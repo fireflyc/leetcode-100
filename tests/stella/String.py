@@ -79,7 +79,8 @@ class StringTestCase(unittest.TestCase):
         self.assertEqual("world hello", String.reverse_words_in_a_string("  hello world  "))
         self.assertEqual("example good a", String.reverse_words_in_a_string("a good   example"))
         self.assertEqual("Alice Loves Bob", String.reverse_words_in_a_string("  Bob    Loves  Alice   "))
-        self.assertEqual("bob like even not does Alice", String.reverse_words_in_a_string("Alice does not even like bob"))
+        self.assertEqual("bob like even not does Alice",
+                         String.reverse_words_in_a_string("Alice does not even like bob"))
 
     def test_integer_to_english_words(self):
         self.assertEqual("One Hundred Twenty Three", String.integer_to_english_words(123))
@@ -91,4 +92,19 @@ class StringTestCase(unittest.TestCase):
         self.assertEqual("Eighty Three", String.integer_to_english_words(83))
         self.assertEqual("Zero", String.integer_to_english_words(0))
 
-
+    def test_count_the_repetitions(self):
+        self.assertEqual(2, String.count_max_repetitions(s1="acb", n1=4, s2="ab", n2=2))
+        self.assertEqual(1, String.count_max_repetitions(s1="acb", n1=1, s2="acb", n2=1))
+        self.assertEqual(4, String.count_max_repetitions(s1="aaa", n1=3, s2="aa", n2=1))
+        self.assertEqual(2468, String.count_max_repetitions(s1="niconiconi", n1=99981, s2="nico", n2=81))
+        self.assertEqual(10000, String.count_max_repetitions(
+            s1="phqghumeaylnlfdxfircvscxggbwkfnqduxwfnfozvsrtkjpre", n1=1000000, s2="pggxr", n2=100
+        ))
+        self.assertEqual(27, String.count_max_repetitions(
+            s1="phqghumeaylnlfdxfircvscxggbwkfnqduxwfnfozvsrtkjprepggxrpnrvystmwcysyycqpevikeffmznimkkasvw",
+            n1=100000, s2="srenzkycxfxtlsgypsfadpooefxzbcoej", n2=333
+        ))
+        self.assertEqual(5620, String.count_max_repetitions(
+            s1="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", n1=1000000,
+            s2="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", n2=103
+        ))

@@ -304,3 +304,32 @@ def integer_to_english_words(num: int) -> str:
 
     data = i2w(str(num))
     return " ".join(data)
+
+
+def count_max_repetitions(s1: str, n1: int, s2: str, n2: int) -> int:
+    if not set(s2).issubset(s1):
+        return 0
+    s1 = "".join([s for s in s1 if s in s2])
+    if set(s1) == set(s2) and len(set(s1)) == 1:
+        return int((len(s1)*n1)/(len(s2)*n2))
+    if not n1 % n2:
+        n1 = int(n1/n2)
+        n2 = 1
+
+    sn2_idx = 0
+    for n in range(0, n1):
+        p = 0
+        while p < len(s1):
+            i = sn2_idx % len(s2)
+            found = s1[p:].find(s2[i])
+            if found < 0:
+                break
+            sn2_idx += 1
+            p += found+1
+    sn2_count = int(sn2_idx / len(s2))
+    return int(sn2_count / n2)
+
+
+
+
+
