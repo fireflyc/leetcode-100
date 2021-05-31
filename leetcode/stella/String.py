@@ -311,9 +311,9 @@ def count_max_repetitions(s1: str, n1: int, s2: str, n2: int) -> int:
         return 0
     s1 = "".join([s for s in s1 if s in s2])
     if set(s1) == set(s2) and len(set(s1)) == 1:
-        return int((len(s1)*n1)/(len(s2)*n2))
+        return int((len(s1) * n1) / (len(s2) * n2))
     if not n1 % n2:
-        n1 = int(n1/n2)
+        n1 = int(n1 / n2)
         n2 = 1
 
     sn2_idx = 0
@@ -325,11 +325,31 @@ def count_max_repetitions(s1: str, n1: int, s2: str, n2: int) -> int:
             if found < 0:
                 break
             sn2_idx += 1
-            p += found+1
+            p += found + 1
     sn2_count = int(sn2_idx / len(s2))
     return int(sn2_count / n2)
 
 
+def super_palindromes(left: str, right: str) -> int:
+    def is_palindrome(s):
+        for i in range(0, int((len(s) + 1) / 2)):
+            if s[i] != s[len(s) - 1 - i]:
+                return False
+        return True
 
+    def generate_palindrome(l: int):
+        for c1 in "0123456789":
+            if l <= 2:
+                yield c1 * l
+            else:
+                for p in generate_palindrome(l - 2):
+                    yield c1 + p + c1
 
-
+    start, end, count = str(int(int(left) ** (1 / 2))), str(int(int(right) ** (1 / 2))), 0
+    for j in range(len(start), len(end) + 1):
+        for palindrome in generate_palindrome(j):
+            if palindrome[0] != "0":
+                square_palindrome = int(palindrome) ** 2
+                if is_palindrome(str(int(square_palindrome))) and int(left) <= square_palindrome < int(right):
+                    count += 1
+    return count

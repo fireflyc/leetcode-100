@@ -108,3 +108,8 @@ class StringTestCase(unittest.TestCase):
             s1="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", n1=1000000,
             s2="aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", n2=103
         ))
+
+    def test_super_palindromes(self):
+        self.assertEqual(4, String.super_palindromes(left="4", right="1000"))
+        self.assertEqual(2, String.super_palindromes(left="40000000000000000", right="50000000000000000"))
+        self.assertEqual(47, String.super_palindromes(left="4", right=str(10 ** 16)))
