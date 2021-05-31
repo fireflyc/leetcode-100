@@ -113,3 +113,20 @@ class StringTestCase(unittest.TestCase):
         self.assertEqual(4, String.super_palindromes(left="4", right="1000"))
         self.assertEqual(2, String.super_palindromes(left="40000000000000000", right="50000000000000000"))
         self.assertEqual(47, String.super_palindromes(left="4", right=str(10 ** 16)))
+
+    def test_word_subsets(self):
+        self.assertEqual(["facebook", "google", "leetcode"], String.word_subsets(
+            words1=["amazon", "apple", "facebook", "google", "leetcode"], words2=["e", "o"]
+        ))
+        self.assertEqual(["apple", "google", "leetcode"], String.word_subsets(
+            words1=["amazon", "apple", "facebook", "google", "leetcode"], words2=["l", "e"]
+        ))
+        self.assertEqual(["facebook", "google"], String.word_subsets(
+            words1=["amazon", "apple", "facebook", "google", "leetcode"], words2=["e", "oo"]
+        ))
+        self.assertEqual(["google", "leetcode"], String.word_subsets(
+            words1=["amazon", "apple", "facebook", "google", "leetcode"], words2=["lo", "eo"]
+        ))
+        self.assertEqual(["facebook", "leetcode"], String.word_subsets(
+            words1=["amazon", "apple", "facebook", "google", "leetcode"], words2=["ec", "oc", "ceo"]
+        ))

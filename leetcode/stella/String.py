@@ -353,3 +353,21 @@ def super_palindromes(left: str, right: str) -> int:
                 if is_palindrome(str(int(square_palindrome))) and int(left) <= square_palindrome < int(right):
                     count += 1
     return count
+
+
+def word_subsets(words1: List[str], words2: List[str]) -> List[str]:
+    word2_letters = {}
+    for w in words2:
+        for c in set(w):
+            word2_letters.update({c: max(w.count(c), word2_letters.get(c) or 0)})
+
+    subsets = []
+    for w1 in words1:
+        matched = True
+        for c, n in word2_letters.items():
+            if w1.count(c) < n:
+                matched = False
+                break
+        if matched:
+            subsets.append(w1)
+    return subsets
