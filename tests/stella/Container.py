@@ -85,3 +85,17 @@ class ContainerTestCase(unittest.TestCase):
              10696, 36527, 23365, 28714, 28763, 43465, 55443, 30708, 9606, 49424, 49259, 62511, 25824, 30400, 35428,
              58466, 46151, 1394, 13587, 55960, 38369, 57272, 26961, 13793, 271, 65277, 8937, 42137, 32093, 24913, 35206,
              5130, 63572, 32292]))
+
+    def test_design_underground_system(self):
+        self.assertEqual(
+            [None, None, None, None, None, None, None, 14.0, 11.0, None, 11.0, None, 12.0],
+            Container.design_underground_system(
+                ["UndergroundSystem", "checkIn", "checkIn", "checkIn", "checkOut", "checkOut", "checkOut",
+                 "getAverageTime", "getAverageTime", "checkIn", "getAverageTime", "checkOut", "getAverageTime"],
+                [[], [45, "Leyton", 3], [32, "Paradise", 8], [27, "Leyton", 10], [45, "Waterloo", 15],
+                 [27, "Waterloo", 20],
+                 [32, "Cambridge", 22], ["Paradise", "Cambridge"], ["Leyton", "Waterloo"],
+                 [10, "Leyton", 24],
+                 ["Leyton", "Waterloo"], [10, "Waterloo", 38], ["Leyton", "Waterloo"]]
+            )
+        )
