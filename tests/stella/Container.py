@@ -105,3 +105,9 @@ class ContainerTestCase(unittest.TestCase):
             ["Twitter", "postTweet", "getNewsFeed", "follow", "postTweet", "getNewsFeed", "unfollow", "getNewsFeed"],
             [[], [1, 5], [1], [1, 2], [2, 6], [1], [1, 2], [1]],
         ))
+
+    def test_min_stack(self):
+        self.assertEqual([None, None, None, None, -3, None, 0, -2], Container.min_stack(
+            ["MinStack", "push", "push", "push", "getMin", "pop", "top", "getMin"],
+            [[], [-2], [0], [-3], [], [], [], []]
+        ))

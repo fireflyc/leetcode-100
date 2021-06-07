@@ -117,3 +117,43 @@ def design_tweeter(operators: [], operands: []):
             output.append(tweeter.unfollow(*operand))
     return output
 
+
+class MinStack:
+
+    def __init__(self):
+        self.mins = []
+        self.data = []
+
+    def push(self, val: int) -> None:
+        self.data.append(val)
+        self.mins.append(min(self.mins[-1], val) if self.mins else val)
+
+    def pop(self) -> None:
+        if self.data:
+            self.data.pop()
+            self.mins.pop()
+
+    def top(self) -> int:
+        return self.data[-1] if self.data else None
+
+    def getMin(self) -> int:
+        return self.mins[-1] if self.mins else None
+
+
+def min_stack(operators: [], operands: []):
+    stack, output = None, []
+    for i, operator in enumerate(operators):
+        operand = operands[i]
+        if operator in ["MinStack"]:
+            stack = MinStack()
+            output.append(None)
+        elif operator in ["push"]:
+            output.append(stack.push(*operand))
+        elif operator in ["getMin"]:
+            output.append(stack.getMin())
+        elif operator in ["pop"]:
+            output.append(stack.pop())
+        elif operator in ["top"]:
+            output.append(stack.top())
+    return output
+
