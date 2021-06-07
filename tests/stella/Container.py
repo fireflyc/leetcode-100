@@ -111,3 +111,12 @@ class ContainerTestCase(unittest.TestCase):
             ["MinStack", "push", "push", "push", "getMin", "pop", "top", "getMin"],
             [[], [-2], [0], [-3], [], [], [], []]
         ))
+
+    def test_sum_of_subarray_minimums(self):
+        self.assertEqual(17, Container.sum_of_subarray_minimums([3, 1, 2, 4]))
+        self.assertEqual(444, Container.sum_of_subarray_minimums([11, 81, 94, 43, 3]))
+        with open('sum_of_subarray_minimums.json', 'r') as fr:
+            import json
+            test_data_set = json.load(fr)
+            for test_data in test_data_set:
+                self.assertEqual(test_data['expect'], Container.sum_of_subarray_minimums(test_data['data']))

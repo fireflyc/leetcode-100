@@ -157,3 +157,14 @@ def min_stack(operators: [], operands: []):
             output.append(stack.top())
     return output
 
+
+def sum_of_subarray_minimums(arr: List[int]) -> int:
+    sum_of_minimums = arr[0]
+    for i in range(0, len(arr)):
+        _min = arr[i]
+        sum_of_minimums += _min
+        for j in range(i+1, len(arr)):
+            _min = min(_min, arr[j])
+            sum_of_minimums += _min
+    return sum_of_minimums % (10**9+7)
+
