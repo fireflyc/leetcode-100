@@ -99,3 +99,9 @@ class ContainerTestCase(unittest.TestCase):
                  ["Leyton", "Waterloo"], [10, "Waterloo", 38], ["Leyton", "Waterloo"]]
             )
         )
+
+    def test_design_tweeter(self):
+        self.assertEqual([None, None, [5], None, None, [6, 5], None, [5]], Container.design_tweeter(
+            ["Twitter", "postTweet", "getNewsFeed", "follow", "postTweet", "getNewsFeed", "unfollow", "getNewsFeed"],
+            [[], [1, 5], [1], [1, 2], [2, 6], [1], [1, 2], [1]],
+        ))

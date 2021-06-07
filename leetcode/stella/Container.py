@@ -53,3 +53,67 @@ def design_underground_system(operators: [], operands: []):
         elif operator in ['getAverageTime']:
             output.append(metro.getAverageTime(*operand))
     return output
+
+
+class Twitter:
+
+    def __init__(self):
+        """
+        Initialize your data structure here.
+        """
+        self.tweets = []
+        self.follows = {}
+
+    def postTweet(self, userId: int, tweetId: int) -> None:
+        """
+        Compose a new tweet.
+        """
+        self.tweets.append([userId, tweetId])
+
+    def getNewsFeed(self, userId: int) -> List[int]:
+        """
+        Retrieve the 10 most recent tweet ids in the user's news feed. Each item in the news feed must be posted
+        by users who the user followed or by the user herself. Tweets must be ordered from most recent to least recent.
+        """
+        feeds = []
+        users = (self.follows.get(userId) or set()) | {userId}
+        for idx in range(1, len(self.tweets)+1):
+            if len(feeds) >= 10:
+                break
+            feed = self.tweets[-1*idx]
+            if feed[0] in users:
+                feeds.append(feed[1])
+        return feeds
+
+    def follow(self, followerId: int, followeeId: int) -> None:
+        """
+        Follower follows a followee. If the operation is invalid, it should be a no-op.
+        """
+        self.follows[followerId] = self.follows.get(followerId) or set()
+        self.follows[followerId].add(followeeId)
+
+    def unfollow(self, followerId: int, followeeId: int) -> None:
+        """
+        Follower unfollows a followee. If the operation is invalid, it should be a no-op.
+        """
+        if followeeId in (self.follows.get(followerId) or set()):
+            self.follows[followerId].remove(followeeId)
+
+
+def design_tweeter(operators: [], operands: []):
+    tweeter, output = None, []
+    for i, operator in enumerate(operators):
+        operand = operands[i]
+        if operator in ["Twitter"]:
+            tweeter = Twitter()
+            output.append(None)
+        elif operator in ['postTweet']:
+            output.append(tweeter.postTweet(*operand))
+        elif operator in ['getNewsFeed']:
+            output.append(tweeter.getNewsFeed(*operand))
+        elif operator in ['follow']:
+            output.append(tweeter.follow(*operand))
+        elif operator in ['unfollow']:
+            output.append(tweeter.unfollow(*operand))
+    return output
+
