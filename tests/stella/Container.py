@@ -129,3 +129,18 @@ class ContainerTestCase(unittest.TestCase):
             import json
             data = json.load(fr)
             self.assertEqual(221109441, Container.sum_of_subarray_minimums(data))
+
+    def test_maximum_nesting_depth_of_two_valid_parentheses_string(self):
+        max_depth_after_split = Container.maximum_nesting_depth_of_two_valid_parentheses_string
+        expect = [0, 1, 1, 1, 1, 0]
+        actual = max_depth_after_split(seq="(()())")
+        self.assertEqual(len(expect), len(actual))
+        self.assertEqual(actual.count(1) % 2, 0)
+        expect = [0, 0, 0, 1, 1, 0, 1, 1]
+        actual = max_depth_after_split(seq="()(())()")
+        self.assertEqual(len(expect), len(actual))
+        self.assertEqual(actual.count(1) % 2, 0)
+        expect = [0, 0, 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1]
+        actual = max_depth_after_split(seq="(((()))((())))")
+        self.assertEqual(len(expect), len(actual))
+        self.assertEqual(actual.count(1) % 2, 0)

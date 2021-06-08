@@ -188,3 +188,22 @@ def sum_of_subarray_minimums(arr: List[int]) -> int:
         else:
             less_than_list.append(arr[i])
     return sum_of_minimums % (10 ** 9 + 7)
+
+
+def maximum_nesting_depth_of_two_valid_parentheses_string(seq: str) -> List[int]:
+    left_stack, queue = [], []
+    for s in seq:
+        if s == "(":
+            if left_stack and left_stack[-1] == "A":
+                left_stack.append("B")
+                queue.append(1)
+            else:
+                left_stack.append("A")
+                queue.append(0)
+        elif s == ")":
+            if left_stack.pop() == "A":
+                queue.append(0)
+            else:
+                queue.append(1)
+    return queue
+
