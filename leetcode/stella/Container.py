@@ -1,4 +1,3 @@
-
 from typing import List
 
 
@@ -31,12 +30,12 @@ class UndergroundSystem:
         source, enter_time = self.user_check_in[id][0], self.user_check_in[id][1]
         self.routes[source] = self.routes.get(source) or {}
         self.routes[source][stationName] = self.routes[source].get(stationName) or []
-        self.routes[source][stationName].append(t-enter_time)
+        self.routes[source][stationName].append(t - enter_time)
 
     def getAverageTime(self, startStation: str, endStation: str) -> float:
         if startStation in self.routes and endStation in self.routes[startStation]:
             all_times = self.routes[startStation][endStation]
-            return sum(all_times)/len(all_times)
+            return sum(all_times) / len(all_times)
 
 
 def design_underground_system(operators: [], operands: []):
@@ -77,10 +76,10 @@ class Twitter:
         """
         feeds = []
         users = (self.follows.get(userId) or set()) | {userId}
-        for idx in range(1, len(self.tweets)+1):
+        for idx in range(1, len(self.tweets) + 1):
             if len(feeds) >= 10:
                 break
-            feed = self.tweets[-1*idx]
+            feed = self.tweets[-1 * idx]
             if feed[0] in users:
                 feeds.append(feed[1])
         return feeds
@@ -159,12 +158,33 @@ def min_stack(operators: [], operands: []):
 
 
 def sum_of_subarray_minimums(arr: List[int]) -> int:
-    sum_of_minimums = arr[0]
+    sum_of_minimums, greater_than_dict, less_than_list = 0, {}, []
     for i in range(0, len(arr)):
-        _min = arr[i]
-        sum_of_minimums += _min
-        for j in range(i+1, len(arr)):
-            _min = min(_min, arr[j])
-            sum_of_minimums += _min
-    return sum_of_minimums % (10**9+7)
-
+        sum_of_minimums += arr[i]
+        gt_idx = None
+        if less_than_list and less_than_list[-1] > arr[i]:
+            for j in range(len(less_than_list) - 1, -1, -1):
+                if less_than_list[j] > arr[i]:
+                    gt_idx = j
+                else:
+                    break
+            sum_of_minimums += sum(less_than_list[:gt_idx])
+        else:
+            sum_of_minimums += sum(less_than_list)
+        if gt_idx is not None:
+            greater_than_dict[arr[i]] = greater_than_dict.get(arr[i]) or 0
+            greater_than_dict[arr[i]] += len(less_than_list) - gt_idx
+            less_than_list = less_than_list[:gt_idx]
+        keys = list(greater_than_dict.keys())
+        for k in keys:
+            if k > arr[i]:
+                greater_than_dict[arr[i]] = greater_than_dict.get(arr[i]) or 0
+                greater_than_dict[arr[i]] += greater_than_dict[k]
+                greater_than_dict.pop(k)
+        for k, v in greater_than_dict.items():
+            sum_of_minimums += k * v
+        if arr[i] in greater_than_dict:
+            greater_than_dict[arr[i]] += 1
+        else:
+            less_than_list.append(arr[i])
+    return sum_of_minimums % (10 ** 9 + 7)

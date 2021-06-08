@@ -115,8 +115,17 @@ class ContainerTestCase(unittest.TestCase):
     def test_sum_of_subarray_minimums(self):
         self.assertEqual(17, Container.sum_of_subarray_minimums([3, 1, 2, 4]))
         self.assertEqual(444, Container.sum_of_subarray_minimums([11, 81, 94, 43, 3]))
+        self.assertEqual(493, Container.sum_of_subarray_minimums([92, 80, 9, 62, 49]))
         with open('sum_of_subarray_minimums.json', 'r') as fr:
             import json
             test_data_set = json.load(fr)
             for test_data in test_data_set:
                 self.assertEqual(test_data['expect'], Container.sum_of_subarray_minimums(test_data['data']))
+        with open('sum_of_subarray_minimums_2.json', 'r') as fr:
+            import json
+            data = json.load(fr)
+            self.assertEqual(934721673, Container.sum_of_subarray_minimums(data))
+        with open('sum_of_subarray_minimums_3.json', 'r') as fr:
+            import json
+            data = json.load(fr)
+            self.assertEqual(221109441, Container.sum_of_subarray_minimums(data))
