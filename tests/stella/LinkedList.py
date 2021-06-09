@@ -26,3 +26,16 @@ class LinkedListTestCase(unittest.TestCase):
         node = LinkedList.middle_of_the_linked_list(get_list_node([1, 2, 3, 4, 5, 6]))
         self.assertEqual(4, node.val)
 
+    def test_remove_nth_node(self):
+        data = LinkedList.remove_nth_node_from_end_of_list(get_list_node([1, 2, 3, 4, 5]), 2)
+        actual = []
+        while data:
+            actual.append(data.val)
+            data = data.next
+        self.assertEqual([1, 2, 3, 5], actual)
+        data = LinkedList.remove_nth_node_from_end_of_list(get_list_node([1, 2]), 2)
+        actual = []
+        while data:
+            actual.append(data.val)
+            data = data.next
+        self.assertEqual([2], actual)

@@ -23,8 +23,25 @@ def middle_of_the_linked_list(head: ListNode) -> ListNode:
     while end.next:
         end = end.next
         end_distance += 1
-        middle_pos = int((end_distance+1)/2) if end_distance % 2 else int(end_distance/2)
+        middle_pos = int((end_distance + 1) / 2) if end_distance % 2 else int(end_distance / 2)
         while middle_distance < middle_pos:
             middle = middle.next
             middle_distance += 1
     return middle
+
+
+def remove_nth_node_from_end_of_list(head: ListNode, n: int) -> ListNode:
+    target, walk, distance = head, head, 0
+    while walk.next:
+        walk = walk.next
+        if distance < n:
+            distance += 1
+        else:
+            target = target.next
+    if distance == n:
+        target.next = target.next.next if target.next else None
+        return head
+    elif distance == n-1:
+        return head.next
+    else:
+        return head
