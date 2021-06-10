@@ -45,3 +45,22 @@ def remove_nth_node_from_end_of_list(head: ListNode, n: int) -> ListNode:
         return head.next
     else:
         return head
+
+
+def merge_two_sorted_lists(l1: ListNode, l2: ListNode) -> ListNode:
+    if l1 is None:
+        return l2
+    if l2 is None:
+        return l1
+    root = l1 if l1.val <= l2.val else l2
+    node1, node2 = (l1.next, l2) if l1.val <= l2.val else (l1, l2.next)
+    cur = root
+    while node1 or node2:
+        node = node1 if (node1 and node2 and node1.val <= node2.val) or (node1 and not node2) else node2
+        cur.next = node
+        if node == node1:
+            node1 = node1.next
+        elif node == node2:
+            node2 = node2.next
+        cur = cur.next
+    return root

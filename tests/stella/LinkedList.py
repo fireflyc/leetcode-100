@@ -39,3 +39,13 @@ class LinkedListTestCase(unittest.TestCase):
             actual.append(data.val)
             data = data.next
         self.assertEqual([2], actual)
+
+    def test_merge_two_sorted_lists(self):
+        data = LinkedList.merge_two_sorted_lists(get_list_node([1, 2, 4]), get_list_node([1, 3, 4]))
+        actual = []
+        while data:
+            actual.append(data.val)
+            data = data.next
+        self.assertEqual([1, 1, 2, 3, 4, 4], actual)
+        self.assertEqual(None, LinkedList.merge_two_sorted_lists(get_list_node([]), get_list_node([])))
+        pass
