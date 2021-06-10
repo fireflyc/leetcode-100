@@ -1,3 +1,6 @@
+from typing import List
+
+
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
@@ -64,3 +67,19 @@ def merge_two_sorted_lists(l1: ListNode, l2: ListNode) -> ListNode:
             node2 = node2.next
         cur = cur.next
     return root
+
+
+def merge_k_sorted_lists(lists: List[ListNode]) -> ListNode:
+    root = ListNode()
+    cur = root
+    while lists:
+        lists = [node for node in lists if node is not None]
+        if lists:
+            min_idx, min_val = 0, lists[0].val
+            for i in range(0, len(lists)):
+                if lists[i].val < min_val:
+                    min_idx, min_val = i, lists[i].val
+            cur.next = lists[min_idx]
+            cur = cur.next
+            lists[min_idx] = lists[min_idx].next
+    return root.next

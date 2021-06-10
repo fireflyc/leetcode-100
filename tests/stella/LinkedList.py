@@ -12,6 +12,14 @@ def get_list_node(data):
     return node.next
 
 
+def link_to_list(root):
+    actual = []
+    while root:
+        actual.append(root.val)
+        root = root.next
+    return actual
+
+
 class LinkedListTestCase(unittest.TestCase):
     def test_add_two_numbers(self):
         ret, actual = LinkedList.add_two_numbers(l1=get_list_node([2, 4, 3]), l2=get_list_node([5, 6, 4])), []
@@ -28,24 +36,17 @@ class LinkedListTestCase(unittest.TestCase):
 
     def test_remove_nth_node(self):
         data = LinkedList.remove_nth_node_from_end_of_list(get_list_node([1, 2, 3, 4, 5]), 2)
-        actual = []
-        while data:
-            actual.append(data.val)
-            data = data.next
-        self.assertEqual([1, 2, 3, 5], actual)
+        self.assertEqual([1, 2, 3, 5], link_to_list(data))
         data = LinkedList.remove_nth_node_from_end_of_list(get_list_node([1, 2]), 2)
-        actual = []
-        while data:
-            actual.append(data.val)
-            data = data.next
-        self.assertEqual([2], actual)
+        self.assertEqual([2], link_to_list(data))
 
     def test_merge_two_sorted_lists(self):
         data = LinkedList.merge_two_sorted_lists(get_list_node([1, 2, 4]), get_list_node([1, 3, 4]))
-        actual = []
-        while data:
-            actual.append(data.val)
-            data = data.next
-        self.assertEqual([1, 1, 2, 3, 4, 4], actual)
+        self.assertEqual([1, 1, 2, 3, 4, 4], link_to_list(data))
         self.assertEqual(None, LinkedList.merge_two_sorted_lists(get_list_node([]), get_list_node([])))
-        pass
+
+    def test_merge_k_sorted_lists(self):
+        data = LinkedList.merge_k_sorted_lists([get_list_node(i) for i in [[1, 4, 5], [1, 3, 4], [2, 6]]])
+        self.assertEqual([1, 1, 2, 3, 4, 4, 5, 6], link_to_list(data))
+        self.assertEqual([], link_to_list(LinkedList.merge_k_sorted_lists([])))
+        self.assertEqual([], link_to_list(LinkedList.merge_k_sorted_lists([get_list_node(i) for i in [[]]])))
