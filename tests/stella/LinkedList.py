@@ -22,11 +22,8 @@ def link_to_list(root):
 
 class LinkedListTestCase(unittest.TestCase):
     def test_add_two_numbers(self):
-        ret, actual = LinkedList.add_two_numbers(l1=get_list_node([2, 4, 3]), l2=get_list_node([5, 6, 4])), []
-        while ret:
-            actual.append(ret.val)
-            ret = ret.next
-        self.assertEqual([7, 0, 8], actual)
+        ret = LinkedList.add_two_numbers(l1=get_list_node([2, 4, 3]), l2=get_list_node([5, 6, 4]))
+        self.assertEqual([7, 0, 8], link_to_list(ret))
 
     def test_middle_of_the_linked_list(self):
         node = LinkedList.middle_of_the_linked_list(get_list_node([1, 2, 3, 4, 5]))
@@ -50,3 +47,10 @@ class LinkedListTestCase(unittest.TestCase):
         self.assertEqual([1, 1, 2, 3, 4, 4, 5, 6], link_to_list(data))
         self.assertEqual([], link_to_list(LinkedList.merge_k_sorted_lists([])))
         self.assertEqual([], link_to_list(LinkedList.merge_k_sorted_lists([get_list_node(i) for i in [[]]])))
+
+    def test_remove_duplicates_from_sorted_list_ii(self):
+        remove_duplicates = LinkedList.remove_duplicates_from_sorted_list_ii
+        self.assertEqual([1, 2, 5], link_to_list(remove_duplicates(get_list_node([1, 2, 3, 3, 4, 4, 5]))))
+        self.assertEqual([2, 3], link_to_list(remove_duplicates(get_list_node([1, 1, 1, 2, 3]))))
+        self.assertEqual([], link_to_list(remove_duplicates(get_list_node([1, 1]))))
+        self.assertEqual([1], link_to_list(remove_duplicates(get_list_node([1, 2, 2]))))

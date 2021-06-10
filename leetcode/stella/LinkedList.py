@@ -83,3 +83,19 @@ def merge_k_sorted_lists(lists: List[ListNode]) -> ListNode:
             cur = cur.next
             lists[min_idx] = lists[min_idx].next
     return root.next
+
+
+def remove_duplicates_from_sorted_list_ii(head: ListNode) -> ListNode:
+    root = ListNode()
+    non_repeat, walk, repeat_val = root, head, None
+    while walk:
+        if walk.val != repeat_val and (not walk.next or walk.next.val != walk.val):
+            non_repeat.next = walk
+            non_repeat = non_repeat.next
+            repeat_val = None
+        elif walk.val != repeat_val and walk.next and walk.next.val == walk.val:
+            repeat_val = walk.val
+            walk = walk.next
+        walk = walk.next
+        non_repeat.next = None
+    return root.next
