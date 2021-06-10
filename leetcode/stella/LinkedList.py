@@ -99,3 +99,7 @@ def remove_duplicates_from_sorted_list_ii(head: ListNode) -> ListNode:
         walk = walk.next
         non_repeat.next = None
     return root.next
+
+
+def partition_list(head: ListNode, x: int) -> ListNode:
+    pass
