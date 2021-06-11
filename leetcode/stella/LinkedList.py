@@ -102,4 +102,21 @@ def remove_duplicates_from_sorted_list_ii(head: ListNode) -> ListNode:
 
 
 def partition_list(head: ListNode, x: int) -> ListNode:
-    pass
+    root, demarc = ListNode(next=head), None
+    cur, less_than = root, root
+    while cur.next:
+        if cur.next.val < x:
+            if demarc is None:
+                less_than = cur.next
+            else:
+                tmp = cur.next
+                cur.next = tmp.next
+                tmp.next = less_than.next
+                less_than.next = tmp
+                less_than = less_than.next
+                continue
+        elif cur.next.val >= x and demarc is None:
+            demarc = cur.next
+        cur = cur.next
+    return root.next
+

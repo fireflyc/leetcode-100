@@ -59,3 +59,8 @@ class LinkedListTestCase(unittest.TestCase):
         partition = LinkedList.partition_list
         self.assertEqual([1, 2, 2, 4, 3, 5], link_to_list(partition(get_list_node([1, 4, 3, 2, 5, 2]), 3)))
         self.assertEqual([1, 2], link_to_list(partition(get_list_node([2, 1]), 2)))
+        self.assertEqual([], link_to_list(partition(get_list_node([]), 0)))
+        self.assertEqual([1, 0, 2, 2, 4, 3, 5], link_to_list(partition(get_list_node([1, 4, 3, 0, 2, 5, 2]), 3)))
+        self.assertEqual([1, 1], link_to_list(partition(get_list_node([1, 1]), 2)))
+        self.assertEqual([2, 0, 1, 3, 1, 0, 3, 4, 4],
+                         link_to_list(partition(get_list_node([2, 0, 4, 1, 3, 1, 4, 0, 3]), 4)))
