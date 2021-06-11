@@ -139,3 +139,15 @@ def rotate_list(head: ListNode, k: int) -> ListNode:
         end.next = head
         head = tmp
     return head
+
+
+def swap_nodes_in_pairs(head: ListNode) -> ListNode:
+    root = ListNode(next=head)
+    cur = root
+    while cur.next and cur.next.next:
+        tmp1, tmp2 = cur.next, cur.next.next
+        tmp1.next = tmp2.next
+        tmp2.next = tmp1
+        cur.next = tmp2
+        cur = tmp1
+    return root.next

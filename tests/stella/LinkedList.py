@@ -71,3 +71,7 @@ class LinkedListTestCase(unittest.TestCase):
         self.assertEqual([1], link_to_list(LinkedList.rotate_list(get_list_node([1]), 1)))
         self.assertEqual([1, 1], link_to_list(LinkedList.rotate_list(get_list_node([1, 1]), 2)))
 
+    def test_swap_nodes_in_pairs(self):
+        self.assertEqual([2, 1, 4, 3], link_to_list(LinkedList.swap_nodes_in_pairs(get_list_node([1, 2, 3, 4]))))
+        self.assertEqual([], link_to_list(LinkedList.swap_nodes_in_pairs(get_list_node([]))))
+        self.assertEqual([1], link_to_list(LinkedList.swap_nodes_in_pairs(get_list_node([1]))))
