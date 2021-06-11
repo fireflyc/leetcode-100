@@ -64,3 +64,10 @@ class LinkedListTestCase(unittest.TestCase):
         self.assertEqual([1, 1], link_to_list(partition(get_list_node([1, 1]), 2)))
         self.assertEqual([2, 0, 1, 3, 1, 0, 3, 4, 4],
                          link_to_list(partition(get_list_node([2, 0, 4, 1, 3, 1, 4, 0, 3]), 4)))
+
+    def test_rotate_list(self):
+        self.assertEqual([4, 5, 1, 2, 3], link_to_list(LinkedList.rotate_list(get_list_node([1, 2, 3, 4, 5]), 2)))
+        self.assertEqual([2, 0, 1], link_to_list(LinkedList.rotate_list(get_list_node([0, 1, 2]), 4)))
+        self.assertEqual([1], link_to_list(LinkedList.rotate_list(get_list_node([1]), 1)))
+        self.assertEqual([1, 1], link_to_list(LinkedList.rotate_list(get_list_node([1, 1]), 2)))
+

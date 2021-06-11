@@ -44,7 +44,7 @@ def remove_nth_node_from_end_of_list(head: ListNode, n: int) -> ListNode:
     if distance == n:
         target.next = target.next.next if target.next else None
         return head
-    elif distance == n-1:
+    elif distance == n - 1:
         return head.next
     else:
         return head
@@ -120,3 +120,22 @@ def partition_list(head: ListNode, x: int) -> ListNode:
         cur = cur.next
     return root.next
 
+
+def rotate_list(head: ListNode, k: int) -> ListNode:
+    if head is None or k == 0:
+        return head
+    start, end, distance = head, head, 0
+    while end.next:
+        end = end.next
+        distance += 1
+        if distance > k:
+            start = start.next
+    if k > distance:
+        for i in range(0, distance - k % (distance + 1)):
+            start = start.next
+    if start != end:
+        tmp = start.next
+        start.next = None
+        end.next = head
+        head = tmp
+    return head
