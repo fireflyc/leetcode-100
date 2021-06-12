@@ -151,3 +151,14 @@ def swap_nodes_in_pairs(head: ListNode) -> ListNode:
         cur.next = tmp2
         cur = tmp1
     return root.next
+
+
+def reverse_linked_list(head: ListNode) -> ListNode:
+    cur = head
+    root = head
+    while cur and cur.next:
+        tmp = cur.next
+        cur.next = tmp.next
+        tmp.next = root
+        root = tmp
+    return root
