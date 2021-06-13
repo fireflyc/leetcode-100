@@ -79,4 +79,10 @@ class LinkedListTestCase(unittest.TestCase):
     def test_reverse_linked_list(self):
         self.assertEqual([5, 4, 3, 2, 1], link_to_list(LinkedList.reverse_linked_list(get_list_node([1, 2, 3, 4, 5]))))
         self.assertEqual([2, 1], link_to_list(LinkedList.reverse_linked_list(get_list_node([1, 2]))))
-        self.assertEqual([], link_to_list(LinkedList.reverse_linked_list(get_list_node([]))))
+
+    def test_reverse_nodes_in_k_groups(self):
+        reverse_k_group = LinkedList.reverse_nodes_in_k_groups
+        self.assertEqual([2, 1, 4, 3, 5], link_to_list(reverse_k_group(get_list_node([1, 2, 3, 4, 5]), 2)))
+        self.assertEqual([3, 2, 1, 4, 5], link_to_list(reverse_k_group(get_list_node([1, 2, 3, 4, 5]), 3)))
+        self.assertEqual([1, 2, 3, 4, 5], link_to_list(reverse_k_group(get_list_node([1, 2, 3, 4, 5]), 1)))
+        self.assertEqual([1], link_to_list(reverse_k_group(get_list_node([1]), 1)))

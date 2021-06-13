@@ -162,3 +162,40 @@ def reverse_linked_list(head: ListNode) -> ListNode:
         tmp.next = root
         root = tmp
     return root
+
+
+def reverse_nodes_in_k_groups(head: ListNode, k: int) -> ListNode:
+
+    def reverse_k_group(point_first):
+        first_node = point_first.next
+        last_node = point_first
+        for i in range(0, k):
+            last_node = last_node.next
+            if last_node is None:
+                return None
+        next_group = last_node.next
+        last_node.next = None
+        cur_one, next_one = point_first.next, point_first.next.next
+        while next_one:
+            tmp = next_one.next
+            next_one.next = cur_one
+            cur_one = next_one
+            if tmp is None:
+                break
+            next_one = tmp
+        first_node.next = next_group
+        point_first.next = next_one
+        return first_node
+
+    if k == 1 or not head:
+        return head
+    root = ListNode(next=head)
+    first_one = root
+    while first_one:
+        first_one = reverse_k_group(first_one)
+    return root.next
+
+
+
+
+
