@@ -196,6 +196,21 @@ def reverse_nodes_in_k_groups(head: ListNode, k: int) -> ListNode:
     return root.next
 
 
-
-
+def insertion_sort_list(head: ListNode) -> ListNode:
+    root = ListNode(next=head)
+    cur = head
+    while cur.next:
+        if cur.next.val >= cur.val:
+            cur = cur.next
+            continue
+        tmp = cur.next
+        cur.next = tmp.next
+        idx = root
+        while idx.next:
+            if idx.next.val > tmp.val:
+                tmp.next = idx.next
+                idx.next = tmp
+                break
+            idx = idx.next
+    return root.next
 

@@ -86,3 +86,7 @@ class LinkedListTestCase(unittest.TestCase):
         self.assertEqual([3, 2, 1, 4, 5], link_to_list(reverse_k_group(get_list_node([1, 2, 3, 4, 5]), 3)))
         self.assertEqual([1, 2, 3, 4, 5], link_to_list(reverse_k_group(get_list_node([1, 2, 3, 4, 5]), 1)))
         self.assertEqual([1], link_to_list(reverse_k_group(get_list_node([1]), 1)))
+
+    def test_insertion_sort_list(self):
+        self.assertEqual([1, 2, 3, 4], link_to_list(LinkedList.insertion_sort_list(get_list_node([4, 2, 1, 3]))))
+        self.assertEqual([-1, 0, 3, 4, 5], link_to_list(LinkedList.insertion_sort_list(get_list_node([-1, 5, 3, 4, 0]))))
