@@ -241,6 +241,3 @@ def add_two_numbers_ii(l1: ListNode, l2: ListNode) -> ListNode:
     if prev_val:
         return ListNode(val=prev_val, next=node)
     return node
-
-
-
