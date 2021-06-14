@@ -214,3 +214,33 @@ def insertion_sort_list(head: ListNode) -> ListNode:
             idx = idx.next
     return root.next
 
+
+def add_two_numbers_ii(l1: ListNode, l2: ListNode) -> ListNode:
+    cur1, cur2 = l1, l2
+    while cur1 or cur2:
+        if cur1 and cur2:
+            cur1 = cur1.next
+            cur2 = cur2.next
+        elif cur1 is None:
+            zero_node = ListNode(val=0, next=l1)
+            l1 = zero_node
+            cur2 = cur2.next
+        elif cur2 is None:
+            zero_node = ListNode(val=0, next=l2)
+            l2 = zero_node
+            cur1 = cur1.next
+
+    def add_node(n1, n2):
+        if n1 is None or n2 is None:
+            return None, 0
+        next_node, suplus = add_node(n1.next, n2.next)
+        num = n1.val + n2.val + suplus
+        return ListNode(val=num % 10, next=next_node), int(num / 10)
+
+    node, prev_val = add_node(l1, l2)
+    if prev_val:
+        return ListNode(val=prev_val, next=node)
+    return node
+
+
+

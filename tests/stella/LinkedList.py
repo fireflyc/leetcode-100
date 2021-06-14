@@ -89,4 +89,10 @@ class LinkedListTestCase(unittest.TestCase):
 
     def test_insertion_sort_list(self):
         self.assertEqual([1, 2, 3, 4], link_to_list(LinkedList.insertion_sort_list(get_list_node([4, 2, 1, 3]))))
-        self.assertEqual([-1, 0, 3, 4, 5], link_to_list(LinkedList.insertion_sort_list(get_list_node([-1, 5, 3, 4, 0]))))
+        self.assertEqual([-1, 0, 3, 4, 5],
+                         link_to_list(LinkedList.insertion_sort_list(get_list_node([-1, 5, 3, 4, 0]))))
+
+    def test_add_two_numbers_ii(self):
+        add = LinkedList.add_two_numbers_ii
+        self.assertEqual([7, 8, 0, 7], link_to_list(add(get_list_node([7, 2, 4, 3]), get_list_node([5, 6, 4]))))
+        self.assertEqual([7, 3], link_to_list(add(get_list_node([0]), get_list_node([7, 3]))))
