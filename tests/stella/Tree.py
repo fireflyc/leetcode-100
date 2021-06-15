@@ -58,3 +58,8 @@ class TreeTestCase(unittest.TestCase):
 
     def test_maximum_depth_of_binary_tree(self):
         self.assertEqual(3, Tree.maximum_depth_of_binary_tree(build_tree([3, 9, 20, None, None, 15, 7])))
+
+    def test_convert_sorted_array_to_bst(self):
+        sa2bst = Tree.convert_sorted_array_to_binary_search_tree
+        actual = flatten_tree(sa2bst([-10, -3, 0, 5, 9]))
+        self.assertEqual([i for i in [0, -3, 9, -10, None, 5] if i is not None], [i for i in actual if i is not None])
