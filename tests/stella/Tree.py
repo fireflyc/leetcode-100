@@ -63,3 +63,7 @@ class TreeTestCase(unittest.TestCase):
         sa2bst = Tree.convert_sorted_array_to_binary_search_tree
         actual = flatten_tree(sa2bst([-10, -3, 0, 5, 9]))
         self.assertEqual([i for i in [0, -3, 9, -10, None, 5] if i is not None], [i for i in actual if i is not None])
+
+    def test_binary_tree_right_side_view(self):
+        self.assertEqual([1, 3, 4], Tree.binary_tree_right_side_view(build_tree([1, 2, 3, None, 5, None, 4])))
+        self.assertEqual([1, 3, 4], Tree.binary_tree_right_side_view(build_tree([1, 2, 3, 4])))

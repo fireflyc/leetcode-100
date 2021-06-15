@@ -44,3 +44,18 @@ def convert_sorted_array_to_binary_search_tree(nums: List[int]) -> TreeNode:
         return node
 
     return bst(nums)
+
+
+def binary_tree_right_side_view(root: TreeNode) -> List[int]:
+    view = []
+    view_of_layer = [root] if root else []
+    while view_of_layer:
+        view.append(view_of_layer[-1].val)
+        tmp = []
+        for n in view_of_layer:
+            if n.left:
+                tmp.append(n.left)
+            if n.right:
+                tmp.append(n.right)
+        view_of_layer = tmp
+    return view
