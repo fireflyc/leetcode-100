@@ -7,4 +7,19 @@ class TreeNode:
 
 
 def delete_leaves_with_a_given_value(root: TreeNode, target: int) -> TreeNode:
-    pass
+    def is_leave(some_node):
+        return some_node and some_node.left is None and some_node.right is None
+
+    def delete_leaves(node):
+        if not node:
+            return
+        delete_leaves(node.left)
+        delete_leaves(node.right)
+        if is_leave(node.left) and node.left.val == target:
+            node.left = None
+        if is_leave(node.right) and node.right.val == target:
+            node.right = None
+
+    delete_leaves(root)
+    return None if is_leave(root) and root.val == target else root
+

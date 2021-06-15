@@ -3,10 +3,38 @@ from leetcode.stella import Tree
 from typing import List
 
 
-def build_tree(vals: List): ...
+def build_tree(vals: List):
+    if not vals:
+        return None
+    nodes = []
+    for val in vals:
+        nodes.append(Tree.TreeNode(val=val) if val is not None else None)
+    idx = 0
+    for node in nodes:
+        if idx >= len(nodes):
+            break
+        if node is not None:
+            idx += 1
+            if idx < len(nodes):
+                node.left = nodes[idx]
+            idx += 1
+            if idx < len(nodes):
+                node.right = nodes[idx]
+    return nodes[0]
 
 
-def flatten_tree(tree: Tree.TreeNode): ...
+def flatten_tree(tree: Tree.TreeNode):
+    if not tree:
+        return []
+    nodes = [tree]
+    idx = 0
+    while idx < len(nodes):
+        node = nodes[idx]
+        if node is not None:
+            if node.right or node.left:
+                nodes.extend([node.left, node.right])
+        idx += 1
+    return [n.val if n else None for n in nodes]
 
 
 class TreeTestCase(unittest.TestCase):
