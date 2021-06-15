@@ -23,3 +23,8 @@ def delete_leaves_with_a_given_value(root: TreeNode, target: int) -> TreeNode:
     delete_leaves(root)
     return None if is_leave(root) and root.val == target else root
 
+
+def maximum_depth_of_binary_tree(root: TreeNode) -> int:
+    def depth(node):
+        return 1 + max(depth(node.left), depth(node.right)) if node else 0
+    return depth(root)

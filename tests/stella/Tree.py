@@ -55,3 +55,6 @@ class TreeTestCase(unittest.TestCase):
         self.assertEqual(expect, flatten_tree(Tree.delete_leaves_with_a_given_value(build_tree(root), target)))
         root, target, expect = [1, 2, 3], 1, [1, 2, 3]
         self.assertEqual(expect, flatten_tree(Tree.delete_leaves_with_a_given_value(build_tree(root), target)))
+
+    def test_maximum_depth_of_binary_tree(self):
+        self.assertEqual(3, Tree.maximum_depth_of_binary_tree(build_tree([3, 9, 20, None, None, 15, 7])))
