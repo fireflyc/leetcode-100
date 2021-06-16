@@ -88,3 +88,26 @@ def subtree_of_another_tree(root: TreeNode, subRoot: TreeNode) -> bool:
         if ret:
             return True
     return False
+
+
+def lowest_common_ancestor_of_binary_tree(root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+    def get_ancestors(node, val):
+        if not node:
+            return []
+        if node.val == val:
+            return [node]
+        if node.val != val:
+            left_ancestor = get_ancestors(node.left, val)
+            if left_ancestor:
+                return [node] + left_ancestor
+            right_ancestor = get_ancestors(node.right, val)
+            if right_ancestor:
+                return [node] + right_ancestor
+        return []
+
+    p_ancestors, q_ancestors = get_ancestors(root, p.val), get_ancestors(root, q.val)
+    common_ancestor = None
+    for i in range(0, min(len(p_ancestors), len(q_ancestors))):
+        if p_ancestors[i].val == q_ancestors[i].val:
+            common_ancestor = p_ancestors[i]
+    return common_ancestor

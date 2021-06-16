@@ -73,3 +73,12 @@ class TreeTestCase(unittest.TestCase):
         self.assertEqual(True, Tree.subtree_of_another_tree(build_tree([3, 4, 5, 1, 2]), build_tree([4, 1, 2])))
         self.assertEqual(False, Tree.subtree_of_another_tree(build_tree([1]), build_tree([0])))
         self.assertEqual(True, Tree.subtree_of_another_tree(build_tree([1, 1]), build_tree([1])))
+
+    def test_lowest_common_ancestor_of_binary_tree(self):
+        lowest_ancestor = Tree.lowest_common_ancestor_of_binary_tree
+        actual = lowest_ancestor(build_tree([3, 5, 1, 6, 2, 0, 8, None, None, 7, 4]), Tree.TreeNode(val=5), Tree.TreeNode(val=4))
+        self.assertEqual(5, actual.val)
+        actual = lowest_ancestor(build_tree([3, 5, 1, 6, 2, 0, 8, None, None, 7, 4]), Tree.TreeNode(val=5), Tree.TreeNode(val=1))
+        self.assertEqual(3, actual.val)
+        actual = lowest_ancestor(build_tree([1, 2]), Tree.TreeNode(val=1), Tree.TreeNode(val=2))
+        self.assertEqual(1, actual.val)
