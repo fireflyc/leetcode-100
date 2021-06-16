@@ -76,9 +76,15 @@ class TreeTestCase(unittest.TestCase):
 
     def test_lowest_common_ancestor_of_binary_tree(self):
         lowest_ancestor = Tree.lowest_common_ancestor_of_binary_tree
-        actual = lowest_ancestor(build_tree([3, 5, 1, 6, 2, 0, 8, None, None, 7, 4]), Tree.TreeNode(val=5), Tree.TreeNode(val=4))
+        actual = lowest_ancestor(build_tree([3, 5, 1, 6, 2, 0, 8, None, None, 7, 4]), Tree.TreeNode(val=5),
+                                 Tree.TreeNode(val=4))
         self.assertEqual(5, actual.val)
-        actual = lowest_ancestor(build_tree([3, 5, 1, 6, 2, 0, 8, None, None, 7, 4]), Tree.TreeNode(val=5), Tree.TreeNode(val=1))
+        actual = lowest_ancestor(build_tree([3, 5, 1, 6, 2, 0, 8, None, None, 7, 4]), Tree.TreeNode(val=5),
+                                 Tree.TreeNode(val=1))
         self.assertEqual(3, actual.val)
         actual = lowest_ancestor(build_tree([1, 2]), Tree.TreeNode(val=1), Tree.TreeNode(val=2))
         self.assertEqual(1, actual.val)
+
+    def test_binary_tree_level_order_traversal(self):
+        level_order = Tree.binary_tree_level_order_traversal
+        self.assertEqual([[3], [9, 20], [15, 7]], level_order(build_tree([3, 9, 20, None, None, 15, 7])))

@@ -111,3 +111,19 @@ def lowest_common_ancestor_of_binary_tree(root: TreeNode, p: TreeNode, q: TreeNo
         if p_ancestors[i].val == q_ancestors[i].val:
             common_ancestor = p_ancestors[i]
     return common_ancestor
+
+
+def binary_tree_level_order_traversal(root: TreeNode) -> List[List[int]]:
+    layers = []
+    layer_nodes = [root] if root else []
+    while layer_nodes:
+        layers.append([n.val for n in layer_nodes])
+        tmp = []
+        for node in layer_nodes:
+            if node.left:
+                tmp.append(node.left)
+            if node.right:
+                tmp.append(node.right)
+        layer_nodes = tmp
+    return layers
+
