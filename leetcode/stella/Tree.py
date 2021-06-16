@@ -127,3 +127,15 @@ def binary_tree_level_order_traversal(root: TreeNode) -> List[List[int]]:
         layer_nodes = tmp
     return layers
 
+
+def validate_binary_search_tree(root: TreeNode) -> bool:
+    def is_bst(node, less_than=None, greater_than=None):
+        if node is None:
+            return True
+        if less_than is not None and node.val >= less_than:
+            return False
+        if greater_than is not None and node.val <= greater_than:
+            return False
+        return is_bst(node.left, less_than=min(less_than, node.val) if less_than is not None else node.val, greater_than=greater_than) and is_bst(node.right, less_than=less_than, greater_than=max(greater_than,node.val) if greater_than is not None else node.val)
+
+    return is_bst(root, None, None)

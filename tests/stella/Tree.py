@@ -88,3 +88,8 @@ class TreeTestCase(unittest.TestCase):
     def test_binary_tree_level_order_traversal(self):
         level_order = Tree.binary_tree_level_order_traversal
         self.assertEqual([[3], [9, 20], [15, 7]], level_order(build_tree([3, 9, 20, None, None, 15, 7])))
+
+    def test_validate_binary_search_tree(self):
+        self.assertEqual(True, Tree.validate_binary_search_tree(build_tree([2, 1, 3])))
+        self.assertEqual(False, Tree.validate_binary_search_tree(build_tree([5, 1, 4, None, None, 3, 6])))
+        self.assertEqual(False, Tree.validate_binary_search_tree(build_tree([5, 4, 6, None, None, 3, 7])))
