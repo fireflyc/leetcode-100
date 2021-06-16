@@ -59,3 +59,32 @@ def binary_tree_right_side_view(root: TreeNode) -> List[int]:
                 tmp.append(n.right)
         view_of_layer = tmp
     return view
+
+
+def subtree_of_another_tree(root: TreeNode, subRoot: TreeNode) -> bool:
+    def is_subtree(node1, node2):
+        if not node1 and not node2:
+            return True
+        if (not node1 and node2) or (node1 and not node2):
+            return False
+        return node1.val == node2.val and is_subtree(node1.left, node2.left) and is_subtree(node1.right, node2.right)
+
+    def find_node(val):
+        nodes = [root]
+        idx = 0
+        while idx < len(nodes):
+            if nodes[idx].val == val:
+                yield nodes[idx]
+            if nodes[idx].left:
+                nodes.append(nodes[idx].left)
+            if nodes[idx].right:
+                nodes.append(nodes[idx].right)
+            idx += 1
+
+    if subRoot is None:
+        return True
+    for n in find_node(subRoot.val):
+        ret = is_subtree(n, subRoot)
+        if ret:
+            return True
+    return False

@@ -67,3 +67,9 @@ class TreeTestCase(unittest.TestCase):
     def test_binary_tree_right_side_view(self):
         self.assertEqual([1, 3, 4], Tree.binary_tree_right_side_view(build_tree([1, 2, 3, None, 5, None, 4])))
         self.assertEqual([1, 3, 4], Tree.binary_tree_right_side_view(build_tree([1, 2, 3, 4])))
+
+    def test_subtree_of_another_tree(self):
+        self.assertEqual(False, Tree.subtree_of_another_tree(build_tree([3, 4, 5, 1, 2]), build_tree([4, 1, 2, 0])))
+        self.assertEqual(True, Tree.subtree_of_another_tree(build_tree([3, 4, 5, 1, 2]), build_tree([4, 1, 2])))
+        self.assertEqual(False, Tree.subtree_of_another_tree(build_tree([1]), build_tree([0])))
+        self.assertEqual(True, Tree.subtree_of_another_tree(build_tree([1, 1]), build_tree([1])))
