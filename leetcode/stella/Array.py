@@ -70,3 +70,23 @@ def container_with_most_water(height: List[int]) -> int:
                     loop = True
                     break
     return most_water
+
+
+def count_number_of_nice_subarrays(nums: List[int], k: int) -> int:
+    evens_between = []
+    count_evens = 0
+    for n in nums:
+        if n % 2:
+            evens_between.append(count_evens)
+            count_evens = 0
+        else:
+            count_evens += 1
+    evens_between.append(count_evens)
+    if k > len(evens_between)-1:
+        return 0
+    count = 0
+    for i in range(0, len(evens_between)-k):
+        count += (evens_between[i]+1)*(evens_between[i+k]+1)
+    return count
+
+

@@ -45,3 +45,9 @@ class ArrayTestCase(unittest.TestCase):
         with open('container_with_most_water.json', 'r') as fr:
             from json import load
             self.assertEqual(48762645, Array.container_with_most_water(load(fr)))
+
+    def test_count_number_of_nice_subarrays(self):
+        # self.assertEqual(2, Array.count_number_of_nice_subarrays(nums=[1, 1, 2, 1, 1], k=3))
+        # self.assertEqual(0, Array.count_number_of_nice_subarrays(nums=[2, 4, 6], k=1))
+        # self.assertEqual(16, Array.count_number_of_nice_subarrays(nums=[2, 2, 2, 1, 2, 2, 1, 2, 2, 2], k=2))
+        self.assertEqual(3, Array.count_number_of_nice_subarrays(nums=[2044, 96397, 50143], k=1))
