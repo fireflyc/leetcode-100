@@ -41,3 +41,7 @@ class ArrayTestCase(unittest.TestCase):
         self.assertEqual(16, Array.container_with_most_water([4, 3, 2, 1, 4]))
         self.assertEqual(1, Array.container_with_most_water([1, 1]))
         self.assertEqual(2, Array.container_with_most_water([1, 2, 1]))
+        self.assertEqual(24, Array.container_with_most_water([1, 3, 2, 5, 25, 24, 5]))
+        with open('container_with_most_water.json', 'r') as fr:
+            from json import load
+            self.assertEqual(48762645, Array.container_with_most_water(load(fr)))

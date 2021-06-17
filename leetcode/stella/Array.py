@@ -52,4 +52,21 @@ def jump_game(nums: List[int]) -> bool:
 
 
 def container_with_most_water(height: List[int]) -> int:
-    pass
+    most_water = 0
+    start, end, loop = 0, len(height)-1, True
+    while start < end and loop:
+        loop = False
+        most_water = max(min(height[start], height[end])*(end-start), most_water)
+        if height[start] >= height[end]:
+            for i in range(end-1, start, -1):
+                if height[i] > height[end]:
+                    end = i
+                    loop = True
+                    break
+        elif height[end] > height[start]:
+            for i in range(start+1, end):
+                if height[i] > height[start]:
+                    start = i
+                    loop = True
+                    break
+    return most_water
