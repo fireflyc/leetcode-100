@@ -41,7 +41,7 @@ def merge_intervals(intervals: List[List[int]]) -> List[List[int]]:
 
 def jump_game(nums: List[int]) -> bool:
     reachable, gap = True, 1
-    for i in range(len(nums)-2, -1, -1):
+    for i in range(len(nums) - 2, -1, -1):
         if nums[i] >= gap:
             reachable = True
             gap = 1
@@ -53,18 +53,18 @@ def jump_game(nums: List[int]) -> bool:
 
 def container_with_most_water(height: List[int]) -> int:
     most_water = 0
-    start, end, loop = 0, len(height)-1, True
+    start, end, loop = 0, len(height) - 1, True
     while start < end and loop:
         loop = False
-        most_water = max(min(height[start], height[end])*(end-start), most_water)
+        most_water = max(min(height[start], height[end]) * (end - start), most_water)
         if height[start] >= height[end]:
-            for i in range(end-1, start, -1):
+            for i in range(end - 1, start, -1):
                 if height[i] > height[end]:
                     end = i
                     loop = True
                     break
         elif height[end] > height[start]:
-            for i in range(start+1, end):
+            for i in range(start + 1, end):
                 if height[i] > height[start]:
                     start = i
                     loop = True
@@ -82,24 +82,40 @@ def count_number_of_nice_subarrays(nums: List[int], k: int) -> int:
         else:
             count_evens += 1
     evens_between.append(count_evens)
-    if k > len(evens_between)-1:
+    if k > len(evens_between) - 1:
         return 0
     count = 0
-    for i in range(0, len(evens_between)-k):
-        count += (evens_between[i]+1)*(evens_between[i+k]+1)
+    for i in range(0, len(evens_between) - k):
+        count += (evens_between[i] + 1) * (evens_between[i + k] + 1)
     return count
 
 
 def search_in_rotated_sorted_array(nums: List[int], target: int) -> int:
     factor = 1 if target >= nums[0] else -1
     idx = 0 if factor > 0 else -1
-    while 0 <= idx < len(nums) or -1*len(nums) <= idx < 0:
+    while 0 <= idx < len(nums) or -1 * len(nums) <= idx < 0:
         if nums[idx] != target:
-            if (factor < 0 and idx+factor >= -1*len(nums) and nums[idx+factor] < nums[idx]) or \
-                    (factor > 0 and idx+factor < len(nums) and nums[idx+factor] > nums[idx]):
+            if (factor < 0 and idx + factor >= -1 * len(nums) and nums[idx + factor] < nums[idx]) or \
+                    (factor > 0 and idx + factor < len(nums) and nums[idx + factor] > nums[idx]):
                 idx += factor
             else:
                 return -1
         else:
-            return idx if factor > 0 else len(nums)+idx
+            return idx if factor > 0 else len(nums) + idx
     return -1
+
+
+class MountainArray:
+
+    def __init__(self, arr: List[int]):
+        self.arr = arr
+
+    def get(self, index: int) -> int:
+        return self.arr[index]
+
+    def length(self) -> int:
+        return len(self.arr)
+
+
+def find_in_mountain_array(target: int, mountain_arr: MountainArray) -> int:
+    pass

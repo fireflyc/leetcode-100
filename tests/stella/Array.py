@@ -58,3 +58,7 @@ class ArrayTestCase(unittest.TestCase):
         self.assertEqual(-1, Array.search_in_rotated_sorted_array(nums=[1], target=0))
         self.assertEqual(-1, Array.search_in_rotated_sorted_array(nums=[1], target=2))
         self.assertEqual(1, Array.search_in_rotated_sorted_array(nums=[1, 3], target=3))
+
+    def test_find_in_mountain_array(self):
+        self.assertEqual(2, Array.find_in_mountain_array(3, Array.MountainArray([1, 2, 3, 4, 5, 3, 1])))
+        self.assertEqual(-1, Array.find_in_mountain_array(3, Array.MountainArray([0, 1, 2, 4, 2, 1])))
