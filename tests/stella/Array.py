@@ -51,3 +51,10 @@ class ArrayTestCase(unittest.TestCase):
         self.assertEqual(0, Array.count_number_of_nice_subarrays(nums=[2, 4, 6], k=1))
         self.assertEqual(16, Array.count_number_of_nice_subarrays(nums=[2, 2, 2, 1, 2, 2, 1, 2, 2, 2], k=2))
         self.assertEqual(3, Array.count_number_of_nice_subarrays(nums=[2044, 96397, 50143], k=1))
+
+    def test_search_in_rotated_sorted_array(self):
+        self.assertEqual(4, Array.search_in_rotated_sorted_array(nums=[4, 5, 6, 7, 0, 1, 2], target=0))
+        self.assertEqual(-1, Array.search_in_rotated_sorted_array(nums=[4, 5, 6, 7, 0, 1, 2], target=3))
+        self.assertEqual(-1, Array.search_in_rotated_sorted_array(nums=[1], target=0))
+        self.assertEqual(-1, Array.search_in_rotated_sorted_array(nums=[1], target=2))
+        self.assertEqual(1, Array.search_in_rotated_sorted_array(nums=[1, 3], target=3))

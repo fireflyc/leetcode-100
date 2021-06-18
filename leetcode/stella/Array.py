@@ -90,3 +90,16 @@ def count_number_of_nice_subarrays(nums: List[int], k: int) -> int:
     return count
 
 
+def search_in_rotated_sorted_array(nums: List[int], target: int) -> int:
+    factor = 1 if target >= nums[0] else -1
+    idx = 0 if factor > 0 else -1
+    while 0 <= idx < len(nums) or -1*len(nums) <= idx < 0:
+        if nums[idx] != target:
+            if (factor < 0 and idx+factor >= -1*len(nums) and nums[idx+factor] < nums[idx]) or \
+                    (factor > 0 and idx+factor < len(nums) and nums[idx+factor] > nums[idx]):
+                idx += factor
+            else:
+                return -1
+        else:
+            return idx if factor > 0 else len(nums)+idx
+    return -1
