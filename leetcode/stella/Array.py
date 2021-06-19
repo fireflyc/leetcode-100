@@ -167,3 +167,25 @@ def find_in_mountain_array(target: int, mountain_arr: MountainArray) -> int:
         return -1
 
     return find_in_mountain(0, mountain_arr.length()-1)
+
+
+def happy_number(n: int) -> bool:
+    cache = set()
+
+    def do_match(num):
+        total = 0
+        while num >= 10:
+            i = num % 10
+            num = int(num/10)
+            total += i**2
+        total += num**2
+        return total
+
+    m = n
+    while m not in cache:
+        if m == 1:
+            return True
+        cache.add(m)
+        m = do_match(m)
+    return False
+

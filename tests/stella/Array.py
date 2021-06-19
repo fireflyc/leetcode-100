@@ -78,3 +78,6 @@ class ArrayTestCase(unittest.TestCase):
         self.assertEqual(-1, Array.find_in_mountain_array(102, Array.MountainArray(data)))
         self.assertEqual(0, Array.find_in_mountain_array(1, Array.MountainArray([1, 5, 2])))
 
+    def test_happy_number(self):
+        self.assertEqual(True, Array.happy_number(19))
+        self.assertEqual(False, Array.happy_number(2))
