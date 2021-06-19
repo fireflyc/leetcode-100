@@ -118,4 +118,52 @@ class MountainArray:
 
 
 def find_in_mountain_array(target: int, mountain_arr: MountainArray) -> int:
-    pass
+    cache = {}
+
+    def get(idx):
+        if idx not in cache:
+            val = mountain_arr.get(idx)
+            cache[idx] = val
+        return cache[idx]
+
+    def is_slope(s, e):
+        if e - s >= 3:
+            val_s, val_m1, val_m2, val_e = get(s), get(s+1), get(e-1), get(e)
+            return val_s < val_m1 < val_m2 < val_e or val_s > val_m1 > val_m2 > val_e
+        if e - s == 2:
+            return not get(s+1) > max(get(s), get(e))
+        return True
+
+    def find_in_slope(s, e):
+        if get(s) == target:
+            return s
+        if get(e) == target:
+            return e
+        if get(s) < target < get(e) or get(s) > target > get(e):
+            m = int((s+e)/2)
+            if m not in [s, e]:
+                p = find_in_mountain(s, m)
+                if p > -1:
+                    return p
+                p = find_in_mountain(m, e)
+                if p > -1:
+                    return p
+        return -1
+
+    def find_in_mountain(s, e):
+        if get(s) > target and get(e) > target:
+            return -1
+        if get(s) == target:
+            return s
+        if e - s <= 2 and get(e) == target:
+            return e
+        m = int((s+e)/2)
+        pos = find_in_slope(s, m) if is_slope(s, m) else find_in_mountain(s, m)
+        if pos > 0:
+            return pos
+        pos = find_in_slope(m, e) if is_slope(m, e) else find_in_mountain(m, e)
+        if pos > 0:
+            return pos
+        return -1
+
+    return find_in_mountain(0, mountain_arr.length()-1)
