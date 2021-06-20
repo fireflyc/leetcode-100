@@ -189,3 +189,24 @@ def happy_number(n: int) -> bool:
         m = do_match(m)
     return False
 
+
+def jump_game_ii(nums: List[int]) -> int:
+    if len(nums) <= 1:
+        return 0
+    cache = {}
+    for idx in range(-1, -1*len(nums)-1, -1):
+        num = nums[idx]
+        if num == 0:
+            continue
+        min_step = None
+        for i in range(num, 0, -1):
+            if i >= -1-idx:
+                min_step = 1
+                break
+            j = idx + i
+            if -1*len(nums) < j < -1 and j in cache:
+                min_step = min(min_step, 1+cache[j]) if min_step is not None else 1+cache[j]
+        if min_step is not None:
+            cache[idx] = min_step
+    return cache[-1*len(nums)]
+

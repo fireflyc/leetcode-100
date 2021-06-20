@@ -81,3 +81,9 @@ class ArrayTestCase(unittest.TestCase):
     def test_happy_number(self):
         self.assertEqual(True, Array.happy_number(19))
         self.assertEqual(False, Array.happy_number(2))
+
+    def test_jump_game_ii(self):
+        self.assertEqual(2, Array.jump_game_ii([2, 3, 1, 1, 4]))
+        self.assertEqual(2, Array.jump_game_ii([2, 3, 0, 1, 4]))
+        self.assertEqual(3, Array.jump_game_ii([5, 9, 3, 2, 1, 0, 2, 3, 3, 1, 0, 0]))
+        self.assertEqual(0, Array.jump_game_ii([0]))
