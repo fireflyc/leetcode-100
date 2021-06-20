@@ -87,3 +87,10 @@ class ArrayTestCase(unittest.TestCase):
         self.assertEqual(2, Array.jump_game_ii([2, 3, 0, 1, 4]))
         self.assertEqual(3, Array.jump_game_ii([5, 9, 3, 2, 1, 0, 2, 3, 3, 1, 0, 0]))
         self.assertEqual(0, Array.jump_game_ii([0]))
+
+    def test_sqrtx(self):
+        self.assertEqual(2, Array.sqrtx(4))
+        self.assertEqual(2, Array.sqrtx(8))
+        self.assertEqual(30133, Array.sqrtx(908017205))
+        self.assertEqual(12469, Array.sqrtx(155484374))
+

@@ -128,10 +128,10 @@ def find_in_mountain_array(target: int, mountain_arr: MountainArray) -> int:
 
     def is_slope(s, e):
         if e - s >= 3:
-            val_s, val_m1, val_m2, val_e = get(s), get(s+1), get(e-1), get(e)
+            val_s, val_m1, val_m2, val_e = get(s), get(s + 1), get(e - 1), get(e)
             return val_s < val_m1 < val_m2 < val_e or val_s > val_m1 > val_m2 > val_e
         if e - s == 2:
-            return not get(s+1) > max(get(s), get(e))
+            return not get(s + 1) > max(get(s), get(e))
         return True
 
     def find_in_slope(s, e):
@@ -140,7 +140,7 @@ def find_in_mountain_array(target: int, mountain_arr: MountainArray) -> int:
         if get(e) == target:
             return e
         if get(s) < target < get(e) or get(s) > target > get(e):
-            m = int((s+e)/2)
+            m = int((s + e) / 2)
             if m not in [s, e]:
                 p = find_in_mountain(s, m)
                 if p > -1:
@@ -157,7 +157,7 @@ def find_in_mountain_array(target: int, mountain_arr: MountainArray) -> int:
             return s
         if e - s <= 2 and get(e) == target:
             return e
-        m = int((s+e)/2)
+        m = int((s + e) / 2)
         pos = find_in_slope(s, m) if is_slope(s, m) else find_in_mountain(s, m)
         if pos > 0:
             return pos
@@ -166,7 +166,7 @@ def find_in_mountain_array(target: int, mountain_arr: MountainArray) -> int:
             return pos
         return -1
 
-    return find_in_mountain(0, mountain_arr.length()-1)
+    return find_in_mountain(0, mountain_arr.length() - 1)
 
 
 def happy_number(n: int) -> bool:
@@ -176,9 +176,9 @@ def happy_number(n: int) -> bool:
         total = 0
         while num >= 10:
             i = num % 10
-            num = int(num/10)
-            total += i**2
-        total += num**2
+            num = int(num / 10)
+            total += i ** 2
+        total += num ** 2
         return total
 
     m = n
@@ -194,19 +194,38 @@ def jump_game_ii(nums: List[int]) -> int:
     if len(nums) <= 1:
         return 0
     cache = {}
-    for idx in range(-1, -1*len(nums)-1, -1):
+    for idx in range(-1, -1 * len(nums) - 1, -1):
         num = nums[idx]
         if num == 0:
             continue
         min_step = None
         for i in range(num, 0, -1):
-            if i >= -1-idx:
+            if i >= -1 - idx:
                 min_step = 1
                 break
             j = idx + i
-            if -1*len(nums) < j < -1 and j in cache:
-                min_step = min(min_step, 1+cache[j]) if min_step is not None else 1+cache[j]
+            if -1 * len(nums) < j < -1 and j in cache:
+                min_step = min(min_step, 1 + cache[j]) if min_step is not None else 1 + cache[j]
         if min_step is not None:
             cache[idx] = min_step
-    return cache[-1*len(nums)]
+    return cache[-1 * len(nums)]
 
+
+def sqrtx(x: int) -> int:
+    expo = 0
+    while x / (10 ** expo) > 100:
+        expo += 2
+    start = 1
+    if expo > 0:
+        prefix = int(x / (10 ** expo))
+        idx = 1
+        while idx ** 2 < prefix:
+            idx += 1
+        start = (idx - 1) * (10 ** int(expo / 2))
+    while start ** 2 <= x:
+        start += 1
+    if (start - 1) ** 2 == x:
+        return start - 1
+    elif start ** 2 == x:
+        return start
+    return int((2 * start - 1) / 2)
