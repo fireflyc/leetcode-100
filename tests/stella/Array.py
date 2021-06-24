@@ -94,3 +94,10 @@ class ArrayTestCase(unittest.TestCase):
         self.assertEqual(30133, Array.sqrtx(908017205))
         self.assertEqual(12469, Array.sqrtx(155484374))
 
+    def test_find_reversed_pairs_in_array(self):
+        self.assertEqual(5, Array.find_reversed_pairs_in_array([7, 5, 6, 4]))
+        self.assertEqual(4, Array.find_reversed_pairs_in_array([1, 3, 2, 3, 1]))
+        with open("reversed_pairs_in_array.json", 'r') as fr:
+            from json import load
+            data = load(fr)
+            self.assertEqual(624875572, Array.find_reversed_pairs_in_array(data))

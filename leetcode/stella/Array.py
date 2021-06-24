@@ -229,3 +229,29 @@ def sqrtx(x: int) -> int:
     elif start ** 2 == x:
         return start
     return int((2 * start - 1) / 2)
+
+
+def find_reversed_pairs_in_array(nums: List[int]) -> int:
+    def merge(start, middle, end):
+        merged, count = [], 0
+        i1, i2 = 0, 0
+        l1, l2 = nums[start: middle], nums[middle: end]
+        while i1 < len(l1) and i2 < len(l2):
+            if l1[i1] > l2[i2]:
+                merged.append(l1[i1])
+                i1 += 1
+                count += len(l2) - i2
+            else:
+                merged.append(l2[i2])
+                i2 += 1
+        merged.extend(l1[i1:])
+        merged.extend(l2[i2:])
+        nums[start: end] = merged
+        return count
+
+    pairs, step = 0, 1
+    while step < len(nums):
+        for i in range(0, len(nums), 2 * step):
+            pairs += merge(i, int(i + step), i + 2 * step)
+        step *= 2
+    return pairs
