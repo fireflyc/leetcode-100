@@ -255,3 +255,27 @@ def find_reversed_pairs_in_array(nums: List[int]) -> int:
             pairs += merge(i, int(i + step), i + 2 * step)
         step *= 2
     return pairs
+
+
+def course_schedule_ii(numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+    lat, prev = [e[0] for e in prerequisites], [e[1] for e in prerequisites]
+    orders = [i for i in range(0, numCourses) if i not in lat and i not in prev]
+    cur = set(prev) - set(lat)
+    graph = dict()
+    for k, v in prerequisites:
+        graph[k] = graph.get(k) or {'depend': set(), 'depended': set()}
+        graph[k]['depend'].add(v)
+        graph[v] = graph.get(v) or {'depend': set(), 'depended': set()}
+        graph[v]['depended'].add(k)
+    while cur:
+        orders.extend(list(cur))
+        candidate = set()
+        for item in cur:
+            candidate.update(graph[item]['depended'])
+        cur.clear()
+        for item in candidate:
+            if graph[item]['depend'].issubset(set(orders)):
+                cur.add(item)
+    return orders[:numCourses] if len(orders) >= numCourses else []
+
+

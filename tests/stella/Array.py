@@ -101,3 +101,16 @@ class ArrayTestCase(unittest.TestCase):
             from json import load
             data = load(fr)
             self.assertEqual(624875572, Array.find_reversed_pairs_in_array(data))
+
+    def test_course_schedule_ii(self):
+        self.assertEqual([0, 1], Array.course_schedule_ii(2, [[1, 0]]))
+        self.assertIn(Array.course_schedule_ii(4, [[1, 0], [2, 0], [3, 1], [3, 2]]), [[0, 1, 2, 3], [0, 2, 1, 3]])
+        self.assertEqual([2, 1, 0], Array.course_schedule_ii(3, [[0, 1], [0, 2], [1, 2]]))
+        self.assertEqual([0, 1, 2], Array.course_schedule_ii(3, []))
+        self.assertEqual([], Array.course_schedule_ii(2, [[1, 0], [0, 1]]))
+        self.assertEqual([], Array.course_schedule_ii(3, [[1, 0], [1, 2], [0, 1]]))
+        self.assertEqual([2, 1, 0, 3], Array.course_schedule_ii(4, [[3, 0], [0, 1]]))
+        with open("course_schedule_ii.json", 'r') as fr:
+            from json import load
+            data = load(fr)
+            assert Array.course_schedule_ii(200, data)
