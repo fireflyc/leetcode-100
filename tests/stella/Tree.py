@@ -93,3 +93,8 @@ class TreeTestCase(unittest.TestCase):
         self.assertEqual(True, Tree.validate_binary_search_tree(build_tree([2, 1, 3])))
         self.assertEqual(False, Tree.validate_binary_search_tree(build_tree([5, 1, 4, None, None, 3, 6])))
         self.assertEqual(False, Tree.validate_binary_search_tree(build_tree([5, 4, 6, None, None, 3, 7])))
+
+    def test_powerx_n(self):
+        self.assertEqual(1024.0, round(Tree.powerx_n(x=2.00000, n=10), ndigits=4))
+        self.assertEqual(9.261, round(Tree.powerx_n(x=2.10000, n=3), ndigits=4))
+        self.assertEqual(0.25, round(Tree.powerx_n(x=2.00000, n=-2), ndigits=4))

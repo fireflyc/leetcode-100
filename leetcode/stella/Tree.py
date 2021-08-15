@@ -139,3 +139,22 @@ def validate_binary_search_tree(root: TreeNode) -> bool:
         return is_bst(node.left, less_than=min(less_than, node.val) if less_than is not None else node.val, greater_than=greater_than) and is_bst(node.right, less_than=less_than, greater_than=max(greater_than,node.val) if greater_than is not None else node.val)
 
     return is_bst(root, None, None)
+
+
+def powerx_n(x: float, n: int):
+    cache = {}
+
+    def power(x, n):
+        if n == 0:
+            return 1
+        if n == 1:
+            return x
+        if n == 2:
+            return x*x
+        if n in cache:
+            return cache[n]
+        data = power(x, int(n/2)) * power(x, n-int(n/2))
+        cache[n] = data
+        return data
+
+    return power(1/x if n < 0 else x, abs(n))
