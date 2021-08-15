@@ -158,3 +158,20 @@ def powerx_n(x: float, n: int):
         return data
 
     return power(1/x if n < 0 else x, abs(n))
+
+
+def kth_smallest_element_in_a_bst(root: TreeNode, k: int):
+    cache = {}
+
+    def visit(node, nodes_before=0):
+        if not node:
+            return nodes_before
+        nodes_before = visit(node.left, nodes_before=nodes_before)
+        cache[nodes_before+1] = node.val
+        nodes_before = visit(node.right, nodes_before+1)
+        return nodes_before
+
+    visit(root)
+    return cache[k]
+
+
