@@ -279,3 +279,33 @@ def course_schedule_ii(numCourses: int, prerequisites: List[List[int]]) -> List[
     return orders[:numCourses] if len(orders) >= numCourses else []
 
 
+def find_median_sorted_arrays(nums1: List[int], nums2: List[int]) -> float:
+    nth = int((len(nums1) + len(nums2)) / 2)
+    if not nums1 or not nums2:
+        _num = nums1 or nums2
+        return _num[nth] if len(_num) % 2 else (_num[nth-1]+_num[nth])/2
+
+    nums1, nums2 = (nums1, nums2) if len(nums1) > len(nums2) or (nums1 and nums1[0] < nums2[0]) else (nums2, nums1)
+    s1, e1, p2 = 0, len(nums1)-1, None
+    while s1 <= e1:
+        p1 = int((s1+e1)/2)
+        p2 = nth - 1 - p1
+        if p2 >= len(nums2):
+            s1, e1 = p1, e1
+            continue
+        if p2 < 0 and nums2[0] < nums1[p1]:
+            s1, e1 = s1, p1
+            continue
+        if p2 >= 0 and p1+1 < len(nums1) and nums1[p1+1] < nums2[p2]:
+            s1, e1 = max(p1+1 if s1+1 == e1 else p1, s1), e1
+            continue
+        elif p2 >= 0 and p2+1 < len(nums2) and nums2[p2+1] < nums1[p1]:
+            s1, e1 = s1, min(p1, e1)
+            continue
+        break
+
+    if p2 < 0:
+        return nums1[nth] if (len(nums1)+len(nums2)) % 2 else (nums1[nth-1] + nums1[nth])/2
+    minimal = min(nums1[0], nums2[0])
+    fours_median = sorted([nums1[nth-1-p2], nums2[p2], nums1[nth-2-p2] if nth-2-p2 >= 0 else minimal, nums2[p2-1] if p2-1 >= 0 else minimal])
+    return fours_median[-1] if (len(nums1)+len(nums2)) % 2 else (fours_median[-1]+fours_median[-2])/2

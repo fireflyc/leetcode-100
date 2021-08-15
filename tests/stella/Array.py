@@ -1,3 +1,4 @@
+import json
 import unittest
 from leetcode.stella import Array
 
@@ -114,3 +115,21 @@ class ArrayTestCase(unittest.TestCase):
             from json import load
             data = load(fr)
             assert Array.course_schedule_ii(200, data)
+
+    def test_find_median_sorted_arrays(self):
+        self.assertEqual(2, Array.find_median_sorted_arrays(nums1=[1, 3], nums2=[2]))
+        self.assertEqual(2.5, Array.find_median_sorted_arrays(nums1=[1, 2], nums2=[3, 4]))
+        self.assertEqual(0.0, Array.find_median_sorted_arrays(nums1=[0, 0], nums2=[0, 0]))
+        self.assertEqual(1.0, Array.find_median_sorted_arrays(nums1=[], nums2=[1]))
+        self.assertEqual(2.0, Array.find_median_sorted_arrays(nums1=[2], nums2=[]))
+        self.assertEqual(4.0, Array.find_median_sorted_arrays(nums1=[5], nums2=[1, 2, 3, 4, 6, 7]))
+        self.assertEqual(0, Array.find_median_sorted_arrays(nums1=[0, 0, 0, 0, 0], nums2=[-1, 0, 0, 0, 0, 0, 1]))
+        self.assertEqual(3, Array.find_median_sorted_arrays(nums1=[3, 4, 5], nums2=[1, 2]))
+        self.assertEqual(4.5, Array.find_median_sorted_arrays(nums1=[2, 3, 4, 5, 7, 8], nums2=[1, 6]))
+        self.assertEqual(5, Array.find_median_sorted_arrays(nums1=[3, 4, 5, 6, 7, 8, 9], nums2=[1, 2]))
+        self.assertEqual(5.5, Array.find_median_sorted_arrays(nums1=[2, 3, 4, 5, 6, 8, 9, 10], nums2=[1, 7]))
+        self.assertEqual(4, Array.find_median_sorted_arrays(nums1=[6], nums2=[1, 2, 3, 4, 5, 7]))
+        with open('./find_median_sorted_arrays.json', 'r') as fr:
+            data = json.load(fr)
+            self.assertEqual(16082.0, Array.find_median_sorted_arrays(**data))
+
